@@ -11,7 +11,7 @@
 #import "MsgDisplay.h"
 #import "wjStringProcessor.h"
 #import "UserViewController.h"
-#import "AnswerViewController.h"
+#import "DetailViewController.h"
 #import "PostAnswerViewController.h"
 #import "SVPullToRefresh.h"
 #import "TopicBestAnswerViewController.h"
@@ -23,8 +23,12 @@
 #import "OpenInSafariActivity.h"
 #import "WeChatMomentsActivity.h"
 #import "WeChatSessionActivity.h"
+#import "WebViewJavascriptBridge.h"
+#import "IDMPhotoBrowser.h"
 
 @interface QuestionViewController ()
+
+@property WebViewJavascriptBridge *bridge;
 
 @end
 
@@ -38,6 +42,7 @@
 @synthesize questionTableView;
 @synthesize questionId;
 @synthesize shouldRefresh;
+@synthesize bridge;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,7 +50,7 @@
     
     self.questionTableView.dataSource = self;
     self.questionTableView.delegate = self;
-    self.questionTableView.tableFooterView = [[UIView alloc]init];
+    self.questionTableView.tableFooterView = [[UIView alloc] init];
     questionSummary = @"";
     
     UIBarButtonItem *shareBtn = [[UIBarButtonItem alloc] bk_initWithBarButtonSystemItem:UIBarButtonSystemItemAction handler:^(id weakSender) {
@@ -62,7 +67,7 @@
     }];
     [self.navigationItem setRightBarButtonItem:shareBtn];
     
-    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)] && self.navigationController.navigationBar.translucent == YES) {
         self.automaticallyAdjustsScrollViewInsets = NO;
         
         UIEdgeInsets insets = self.questionTableView.contentInset;
@@ -149,7 +154,7 @@
     AnswerInfo *tmp = (AnswerInfo *)questionAnswersData[row];
     cell.userNameLabel.text = tmp.nickName;
     cell.answerContentLabel.text = [wjStringProcessor processAnswerDetailString:tmp.answerContent];
-    cell.agreeCountLabel.text = (tmp.agreeCount >= 1000) ? [NSString stringWithFormat:@"%ldK", tmp.agreeCount] : [NSString stringWithFormat:@"%ld", tmp.agreeCount];
+    cell.agreeCountLabel.text = (tmp.agreeCount >= 1000) ? [NSString stringWithFormat:@"%ldK", (long)tmp.agreeCount] : [NSString stringWithFormat:@"%ld", tmp.agreeCount];
     [cell loadAvatarWithURL:tmp.avatarFile];
     cell.userAvatarView.tag = row;
     cell.delegate = self;
@@ -173,9 +178,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger row = [indexPath row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    AnswerViewController *aVC = [[AnswerViewController alloc]initWithNibName:@"AnswerViewController" bundle:nil];
+    DetailViewController *aVC = [[DetailViewController alloc]initWithNibName:@"DetailViewController" bundle:nil];
     AnswerInfo *tmpAns = (AnswerInfo *)questionAnswersData[row];
-    aVC.answerId = [NSString stringWithFormat:@"%ld", tmpAns.answerId];
+    aVC.answerId = [NSString stringWithFormat:@"%ld", (long)tmpAns.answerId];
     [self.navigationController pushViewController:aVC animated:YES];
 }
 
@@ -185,7 +190,7 @@
     if (tmp.uid != -1) {
         UserViewController *uVC = [[UserViewController alloc]initWithNibName:@"UserViewController" bundle:nil];
         AnswerInfo *tmpAns = (AnswerInfo *)questionAnswersData[row];
-        uVC.userId = [NSString stringWithFormat:@"%ld", tmpAns.uid];
+        uVC.userId = [NSString stringWithFormat:@"%ld", (long)tmpAns.uid];
         [self.navigationController pushViewController:uVC animated:YES];
     } else {
         [MsgDisplay showErrorMsg:@"无法查看匿名用户~"];
@@ -195,7 +200,7 @@
 // Question Header View Delegate
 - (void)presentPostAnswerController {
     PostAnswerViewController *postAnswer = [[PostAnswerViewController alloc]init];
-    postAnswer.questionId = [NSString stringWithFormat:@"%ld", questionInfo.questionId];
+    postAnswer.questionId = [NSString stringWithFormat:@"%ld", (long)questionInfo.questionId];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:postAnswer];
     [self presentViewController:nav animated:YES completion:nil];
 }
@@ -207,7 +212,7 @@
 }
 
 - (void)tagTappedAtIndex:(NSInteger)index {
-    NSString *topicId = [NSString stringWithFormat:@"%ld", ((TopicInfo *)questionTopics[index]).topicId];
+    NSString *topicId = [NSString stringWithFormat:@"%ld", (long)((TopicInfo *)questionTopics[index]).topicId];
     TopicBestAnswerViewController *tBA = [[TopicBestAnswerViewController alloc]initWithNibName:@"TopicBestAnswerViewController" bundle:nil];
     tBA.topicId = topicId;
     [self.navigationController pushViewController:tBA animated:YES];

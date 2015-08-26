@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 TWT Studio. All rights reserved.
 //
 
-#import "AnswerViewController.h"
+#import "DetailViewController.h"
 #import "DetailDataManager.h"
 #import "wjStringProcessor.h"
 #import "MsgDisplay.h"
@@ -25,8 +25,10 @@
 #import "OpenInSafariActivity.h"
 #import "PopMenu.h"
 #import "QuestionViewController.h"
+#import "WebViewJavascriptBridge.h"
+#import "IDMPhotoBrowser.h"
 
-@interface AnswerViewController ()
+@interface DetailViewController () <IDMPhotoBrowserDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatarView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
@@ -37,12 +39,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *agreeImageView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *commentItem;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *questionItem;
+@property WebViewJavascriptBridge *bridge;
 
 @property (nonatomic) NSInteger agreeCount;
 
 @end
 
-@implementation AnswerViewController {
+@implementation DetailViewController {
     NSInteger voteValue;
     UIColor *notVotedColor;
     UIColor *votedColor;
@@ -76,6 +79,8 @@
 @synthesize commentItem;
 @synthesize questionItem;
 
+@synthesize bridge;
+
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
@@ -85,6 +90,17 @@
     self.title = @"回答";
     self.automaticallyAdjustsScrollViewInsets = YES;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    [WebViewJavascriptBridge enableLogging];
+    bridge = [WebViewJavascriptBridge bridgeForWebView:answerContentView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
+        NSLog(@"ObjC received message from JS: %@", data);
+        responseCallback(@"Response for message from ObjC");
+    }];
+    [bridge registerHandler:@"imgCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
+        NSLog(@"Callback: %@", data);
+        [self presentHDImageWithURL:data];
+        responseCallback(@"load successfully");
+    }];
     
     userNameLabel.text = @"";
     userSigLabel.text = @"";
@@ -107,7 +123,7 @@
         if ((detailType == DetailTypeAnswer && questionId != nil && summaryString != nil) || (detailType == DetailTypeArticle && answerId != nil && summaryString != nil)) {
             NSURL *shareURL;
             if (detailType == DetailTypeAnswer) {
-                shareURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://wenjin.in/?/question/%@?answer_id=%@&single=TRUE", questionId, answerId]];
+                shareURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://wenjin.in/m/question/id-%@__answer_id-%@__single-TRUE", questionId, answerId]];
             } else {
                 shareURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://wenjin.in/article/%@", answerId]];
             }
@@ -143,13 +159,13 @@
             thankValue = ansData.thankValue;
             uninterestedValue = ansData.uninterested;
             [self setValue:@(ansData.agreeCount) forKey:@"agreeCount"];
-            questionId = [NSString stringWithFormat:@"%ld", ansData.questionId];
+            questionId = [NSString stringWithFormat:@"%ld", (long)ansData.questionId];
             uid = ansData.uid;
             avatarFile = ansData.avatarFile;
             timeStamp = ansData.addTime;
             
             if (ansData.commentCount > 0) {
-                [commentItem setTitle:[NSString stringWithFormat:@"评论 (%ld)", ansData.commentCount]];
+                [commentItem setTitle:[NSString stringWithFormat:@"评论 (%ld)", (long)ansData.commentCount]];
             }
             
             titleString = [NSString stringWithFormat:@"%@ 的回答", nickName];
@@ -236,7 +252,7 @@
     UITapGestureRecognizer *userTapRecognizer = [[UITapGestureRecognizer alloc] bk_initWithHandler:^(id weakSender, UIGestureRecognizerState state, CGPoint location) {
         if (uid != -1) {
             UserViewController *uVC = [[UserViewController alloc]initWithNibName:@"UserViewController" bundle:nil];
-            uVC.userId = [NSString stringWithFormat:@"%ld", uid];
+            uVC.userId = [NSString stringWithFormat:@"%ld", (long)uid];
             [self.navigationController pushViewController:uVC animated:YES];
         } else {
             [MsgDisplay showErrorMsg:@"无法查看匿名用户哦~"];
@@ -289,7 +305,7 @@
         [items addObject:uninterestedItem];
     }
     
-    PopMenu *voteMenu = [[PopMenu alloc] initWithFrame:self.view.bounds items:items];
+    PopMenu *voteMenu = [[PopMenu alloc] initWithFrame:self.navigationController.view.frame items:items];
     voteMenu.menuAnimationType = kPopMenuAnimationTypeSina;
     voteMenu.perRowItemCount = 2;
     [voteMenu setDidSelectedItemCompletion:^(MenuItem *selectedItem) {
@@ -411,6 +427,14 @@
                 break;
         }
     }
+}
+
+- (void)presentHDImageWithURL:(NSString *)url {
+    IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotoURLs:@[[NSURL URLWithString:url]]];
+    browser.displayArrowButton = NO;
+    browser.displayCounterLabel = NO;
+    browser.delegate = self;
+    [self presentViewController:browser animated:YES completion:nil];
 }
 
 #pragma mark - UIWebViewDelegate

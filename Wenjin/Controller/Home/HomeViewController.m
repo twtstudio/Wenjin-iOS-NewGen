@@ -14,7 +14,7 @@
 #import "wjStringProcessor.h"
 #import "UserViewController.h"
 #import "QuestionViewController.h"
-#import "AnswerViewController.h"
+#import "DetailViewController.h"
 #import "TopicBestAnswerViewController.h"
 #import "data.h"
 #import "wjAppearanceManager.h"
@@ -57,7 +57,7 @@
     }
     
     //修复下拉刷新位置错误
-    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)] && self.navigationController.navigationBar.translucent == YES) {
         self.automaticallyAdjustsScrollViewInsets = NO;
         
         UIEdgeInsets insets = self.tableView.contentInset;
@@ -176,6 +176,7 @@
                                         @"201": @"回答了问题",
                                         @"204": @"赞同了回答",
                                         @"501": @"发布了文章",
+                                        @"502": @"赞同了文章",
                                         @"503": @"评论了文章"};
         NSString *actionString = [NSString stringWithFormat:@"%@ %@", tmp.userInfo.nickName, actionDiction[actionIDString]];
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:actionString];
@@ -184,13 +185,17 @@
         [cell loadAvatarImageWithApartURL:tmp.userInfo.avatarFile];
     } else {
         // 是话题的
-        NSString *actionString = [NSString stringWithFormat:@"%@ 话题新增了回复", tmp.topicInfo.topicTitle];
+        NSString *actionIDString = [NSString stringWithFormat:@"%ld", (long)tmp.associateAction];
+        NSDictionary *actionDiction = @{@"101": @"话题新增了问题",
+                                        @"201": @"话题新增了回复",
+                                        @"204": @"话题新增了回复赞同"};
+        NSString *actionString = [NSString stringWithFormat:@"%@ %@", tmp.topicInfo.topicTitle, actionDiction[actionIDString]];
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:actionString];
         [attrStr addAttribute:NSForegroundColorAttributeName value:[wjAppearanceManager userActionTextColor] range:NSMakeRange(0, [tmp.topicInfo.topicTitle length])];
         cell.actionLabel.attributedText = attrStr;
         [cell loadTopicImageWithApartURL:tmp.topicInfo.topicPic];
     }
-    cell.questionLabel.text = (tmp.associateAction == 501 || tmp.associateAction == 503) ? tmp.articleInfo.title : [wjStringProcessor filterHTMLWithString:tmp.questionInfo.questionContent];
+    cell.questionLabel.text = (tmp.associateAction == 501 || tmp.associateAction == 502 || tmp.associateAction == 503) ? tmp.articleInfo.title : [wjStringProcessor filterHTMLWithString:tmp.questionInfo.questionContent];
     cell.detailLabel.text = [wjStringProcessor processAnswerDetailString:tmp.answerInfo.answerContent];
     cell.actionLabel.tag = row;
     cell.questionLabel.tag = row;
@@ -208,7 +213,7 @@
         if (cell.userInfo.uid != -1) {
             UserViewController *uVC = [[UserViewController alloc]initWithNibName:@"UserViewController" bundle:nil];
             uVC.hidesBottomBarWhenPushed = YES;
-            uVC.userId = [NSString stringWithFormat:@"%ld", cell.userInfo.uid];
+            uVC.userId = [NSString stringWithFormat:@"%ld", (long)cell.userInfo.uid];
             [self.navigationController pushViewController:uVC animated:YES];
         } else {
             [MsgDisplay showErrorMsg:@"无法查看匿名用户~"];
@@ -216,7 +221,7 @@
     } else {
         TopicBestAnswerViewController *topicVC = [[TopicBestAnswerViewController alloc] initWithNibName:@"TopicBestAnswerViewController" bundle:nil];
         topicVC.hidesBottomBarWhenPushed = YES;
-        topicVC.topicId = [NSString stringWithFormat:@"%ld", cell.topicInfo.topicId];
+        topicVC.topicId = [NSString stringWithFormat:@"%ld", (long)cell.topicInfo.topicId];
         [self.navigationController pushViewController:topicVC animated:YES];
     }
 }
@@ -224,26 +229,26 @@
 - (void)pushQuestionControllerWithRow:(NSUInteger)row {
     QuestionViewController *qVC = [[QuestionViewController alloc]initWithNibName:@"QuestionViewController" bundle:nil];
     HomeCell *cell = (HomeCell *)dataInView[row];
-    if (cell.associateAction == 501 || cell.associateAction == 503) {
+    if (cell.associateAction == 501 || cell.associateAction == 502 || cell.associateAction == 503) {
         // 文章
-        NSLog(@"%ld", cell.articleInfo.aid);
-        AnswerViewController *aVC = [[AnswerViewController alloc] initWithNibName:@"AnswerViewController" bundle:nil];
+        NSLog(@"%ld", (long)cell.articleInfo.aid);
+        DetailViewController *aVC = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
         aVC.detailType = DetailTypeArticle;
-        aVC.answerId = [NSString stringWithFormat:@"%ld", cell.articleInfo.aid];
+        aVC.answerId = [NSString stringWithFormat:@"%ld", (long)cell.articleInfo.aid];
         aVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:aVC animated:YES];
     } else {
-        qVC.questionId = [NSString stringWithFormat:@"%ld", cell.questionInfo.questionId];
+        qVC.questionId = [NSString stringWithFormat:@"%ld", (long)cell.questionInfo.questionId];
         qVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:qVC animated:YES];
     }
 }
 
-- (void)pushAnswerControllerWithRow:(NSUInteger)row {
-    AnswerViewController *aVC = [[AnswerViewController alloc]initWithNibName:@"AnswerViewController" bundle:nil];
+- (void)pushDetailControllerWithRow:(NSUInteger)row {
+    DetailViewController *aVC = [[DetailViewController alloc]initWithNibName:@"DetailViewController" bundle:nil];
     aVC.hidesBottomBarWhenPushed = YES;
     HomeCell *cell = (HomeCell *)dataInView[row];
-    aVC.answerId = [NSString stringWithFormat:@"%ld", cell.answerInfo.answerId];
+    aVC.answerId = [NSString stringWithFormat:@"%ld", (long)cell.answerInfo.answerId];
     [self.navigationController pushViewController:aVC animated:YES];
 }
 

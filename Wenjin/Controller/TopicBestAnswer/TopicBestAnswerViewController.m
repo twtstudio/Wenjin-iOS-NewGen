@@ -17,17 +17,20 @@
 #import "wjOperationManager.h"
 #import "wjAppearanceManager.h"
 #import "UserViewController.h"
-#import "AnswerViewController.h"
+#import "DetailViewController.h"
 #import "QuestionViewController.h"
 #import "TopicInfo.h"
 #import "TopicBestAnswerCell.h"
+#import "SVPullToRefresh.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface TopicBestAnswerViewController ()
+@interface TopicBestAnswerViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
 
 @implementation TopicBestAnswerViewController {
     NSMutableArray *rowsData;
+    NSInteger currentPage;
 }
 
 @synthesize topicHeaderView;
@@ -43,11 +46,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    currentPage = 1;
+    
     bestAnswerTableView.delegate = self;
     bestAnswerTableView.dataSource = self;
     bestAnswerTableView.tableFooterView = [[UIView alloc]init];
     bestAnswerTableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 130 - 64)];
     bestAnswerTableView.allowsSelection = NO;
+    bestAnswerTableView.emptyDataSetSource = self;
+    bestAnswerTableView.emptyDataSetDelegate = self;
+    
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)] && self.navigationController.navigationBar.translucent == YES) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        
+        UIEdgeInsets insets = bestAnswerTableView.contentInset;
+        insets.top = self.navigationController.navigationBar.bounds.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
+        bestAnswerTableView.contentInset = insets;
+        bestAnswerTableView.scrollIndicatorInsets = insets;
+    }
     
     topicImage.layer.cornerRadius = topicImage.frame.size.width / 2;
     topicImage.clipsToBounds = YES;
@@ -65,6 +81,14 @@
     
     rowsData = [[NSMutableArray alloc]init];
     
+    __weak TopicBestAnswerViewController *weakSelf = self;
+    [bestAnswerTableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refreshContent];
+    }];
+    [bestAnswerTableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf nextPage];
+    }];
+    
     topicFollowed = NO;
     FBKVOController *kvoController = [FBKVOController controllerWithObserver:self];
     self.KVOController = kvoController;
@@ -79,26 +103,6 @@
     bestAnswerTableView.estimatedRowHeight = 93;
     bestAnswerTableView.rowHeight = UITableViewAutomaticDimension;
     
-    [TopicDataManager getTopicBestAnswerWithTopicID:topicId success:^(NSUInteger _totalRows, NSArray *_rows) {
-        
-        focusTopic.hidden = NO;
-        if (_totalRows != 0) {
-            rowsData = [[NSMutableArray alloc]initWithArray:_rows];
-        } else {
-            UILabel *noCLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height / 2 - 10, self.view.frame.size.width, 20)];
-            noCLabel.text = @"话题下暂无回答";
-            noCLabel.font = [UIFont systemFontOfSize:20];
-            noCLabel.textColor = [UIColor lightGrayColor];
-            noCLabel.textAlignment = NSTextAlignmentCenter;
-            [self.view addSubview:noCLabel];
-        }
-        
-        [bestAnswerTableView reloadData];
-        
-    } failure:^(NSString *errStr) {
-        [MsgDisplay showErrorMsg:errStr];
-    }];
-    
     [TopicDataManager getTopicInfoWithTopicID:topicId userID:[data shareInstance].myUID success:^(TopicInfo *topicInfo) {
         self.title = topicInfo.topicTitle;
         topicTitle.text = topicInfo.topicTitle;
@@ -112,11 +116,52 @@
     } failure:^(NSString *errStr) {
         [MsgDisplay showErrorMsg:errStr];
     }];
+    
+    [self refreshContent];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)getList {
+    [TopicDataManager getTopicBestAnswerWithTopicID:topicId page:currentPage success:^(NSUInteger _totalRows, NSArray *_rows) {
+        
+        focusTopic.hidden = NO;
+        if (_totalRows != 0) {
+            if (currentPage == 1) {
+                [rowsData removeAllObjects];
+                [bestAnswerTableView reloadData];
+                rowsData = [[NSMutableArray alloc] initWithArray:_rows];
+            } else if (currentPage > 1) {
+                [rowsData addObjectsFromArray:_rows];
+            }
+        } else {
+            if (currentPage > 1) {
+                currentPage --;
+                [MsgDisplay showErrorMsg:@"已到最后一页"];
+            }
+        }
+        [bestAnswerTableView reloadData];
+        [bestAnswerTableView.pullToRefreshView stopAnimating];
+        [bestAnswerTableView.infiniteScrollingView stopAnimating];
+        
+    } failure:^(NSString *errStr) {
+        [MsgDisplay showErrorMsg:errStr];
+        [bestAnswerTableView.pullToRefreshView stopAnimating];
+        [bestAnswerTableView.infiniteScrollingView stopAnimating];
+    }];
+}
+
+- (void)refreshContent {
+    currentPage = 1;
+    [self getList];
+}
+
+- (void)nextPage {
+    currentPage ++;
+    [self getList];
 }
 
 - (IBAction)followTopic {
@@ -199,7 +244,7 @@
     TopicBestAnswerCell *tmp = rowsData[row];
     if (tmp.answerInfo.uid != -1) {
         UserViewController *uVC = [[UserViewController alloc]initWithNibName:@"UserViewController" bundle:nil];
-        uVC.userId = [NSString stringWithFormat:@"%ld", tmp.answerInfo.uid];
+        uVC.userId = [NSString stringWithFormat:@"%ld", (long)tmp.answerInfo.uid];
         [self.navigationController pushViewController:uVC animated:YES];
     } else {
         [MsgDisplay showErrorMsg:@"无法查看匿名用户~"];
@@ -209,17 +254,26 @@
 - (void)pushQuestionControllerWithRow:(NSUInteger)row {
     TopicBestAnswerCell *tmp = rowsData[row];
     QuestionViewController *qVC = [[QuestionViewController alloc]initWithNibName:@"QuestionViewController" bundle:nil];
-    qVC.questionId = [NSString stringWithFormat:@"%ld", tmp.questionInfo.questionId];
+    qVC.questionId = [NSString stringWithFormat:@"%ld", (long)tmp.questionInfo.questionId];
     [self.navigationController pushViewController:qVC animated:YES];
 }
 
-- (void)pushAnswerControllerWithRow:(NSUInteger)row {
+- (void)pushDetailControllerWithRow:(NSUInteger)row {
     TopicBestAnswerCell *tmp = rowsData[row];
     if (![tmp.answerInfo.answerContent isEqualToString:@""]) {
-        AnswerViewController *aVC = [[AnswerViewController alloc]initWithNibName:@"AnswerViewController" bundle:nil];
-        aVC.answerId = [NSString stringWithFormat:@"%ld", tmp.answerInfo.answerId];
+        DetailViewController *aVC = [[DetailViewController alloc]initWithNibName:@"DetailViewController" bundle:nil];
+        aVC.answerId = [NSString stringWithFormat:@"%ld", (long)tmp.answerInfo.answerId];
         [self.navigationController pushViewController:aVC animated:YES];
     }
+}
+
+#pragma mark - EmptyDataSet
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"当前话题下暂无回答";
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 /*
