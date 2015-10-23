@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Realm/Realm.h>
 
 @interface wjDatabaseManager : NSObject
 
@@ -16,5 +15,6 @@
 + (void)saveQuestionDraftWithTitle:(NSString *)questionTitle detail:(NSAttributedString *)questionDetail topicsArray:(NSArray *)topicsArr attachAccessKey:(NSString *)attachAccessKey anonymous:(NSInteger)isAnonymous finishBlock:(void(^)())block;
 
 + (void)removeDatabase;
++ (void)removeRealmFile;
 
 @end

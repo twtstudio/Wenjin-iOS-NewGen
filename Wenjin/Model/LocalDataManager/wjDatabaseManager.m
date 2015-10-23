@@ -29,6 +29,7 @@
             block();
         });
     });
+    
 }
 
 + (void)saveQuestionDraftWithTitle:(NSString *)questionTitle detail:(NSAttributedString *)questionDetail topicsArray:(NSArray *)topicsArr attachAccessKey:(NSString *)attachAccessKey anonymous:(NSInteger)isAnonymous finishBlock:(void (^)())block {
@@ -57,6 +58,10 @@
         [realm deleteAllObjects];
         [realm commitWriteTransaction];
     });
+}
+
++ (void)removeRealmFile {
+    [[NSFileManager defaultManager] removeItemAtPath:[RLMRealm defaultRealmPath] error:nil];
 }
 
 @end

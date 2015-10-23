@@ -11,11 +11,11 @@
 #import "DraftTableViewCell.h"
 #import "AnswerDraft.h"
 #import "QuestionDraft.h"
-#import "NYSegmentedControl.h"
 #import "wjAppearanceManager.h"
 #import "PostQuestionViewController.h"
 #import "PostAnswerViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "wjDatabaseManager.h"
 
 #define draftTypeQuestion 0
 #define draftTypeAnswer 1
@@ -29,7 +29,7 @@
 @implementation DraftTableViewController {
     RLMResults *dataArr;
     NSMutableArray *dataInTable;
-    NYSegmentedControl *segmentedControl;
+    UISegmentedControl *segmentedControl;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -39,6 +39,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"realmDataHasBeenCleared"] == nil) {
+        [wjDatabaseManager removeRealmFile];
+    }
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"realmDataHasBeenCleared"];
     
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [[UIView alloc]init];
@@ -50,17 +55,10 @@
     
     dataInTable = [[NSMutableArray alloc] init];
     
-    segmentedControl = [[NYSegmentedControl alloc]initWithItems:@[@"问题", @"答案"]];
+    segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"问题", @"答案"]];
     [segmentedControl addTarget:self action:@selector(updateTable) forControlEvents:UIControlEventValueChanged];
     segmentedControl.selectedSegmentIndex = 0;
-    segmentedControl.borderWidth = 0.0f;
-    segmentedControl.segmentIndicatorBorderWidth = 0.0f;
-    segmentedControl.backgroundColor = [wjAppearanceManager segmentedUnselectedColor];
-    segmentedControl.segmentIndicatorBackgroundColor = [wjAppearanceManager segmentedSelectedColor];
-    segmentedControl.segmentIndicatorInset = 0.0f;
-    segmentedControl.titleTextColor = [wjAppearanceManager segmentedUnselectedTextColor];
-    segmentedControl.selectedTitleTextColor = [UIColor whiteColor];
-    [segmentedControl sizeToFit];
+    [segmentedControl setFrame:CGRectMake(0, 0, 150, segmentedControl.frame.size.height)];
     [self.navigationItem setTitleView:segmentedControl];
     
     _token = [[RLMRealm defaultRealm] addNotificationBlock:^(NSString *notification, RLMRealm *realm) {
@@ -113,6 +111,10 @@
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
+    return [UIImage imageNamed:@"desperateSmile"];
 }
 
 #pragma mark - Table view data source
