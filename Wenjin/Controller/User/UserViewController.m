@@ -17,10 +17,12 @@
 #import "UserListTableViewController.h"
 #import "UserFeedTableViewController.h"
 #import "TopicListTableViewController.h"
-#import "DraftTableViewController.h"
 #import "UINavigationController+JZExtension.h"
+#import "wjAppearanceManager.h"
+#import "DraftPageController.h"
+#import "Chameleon.h"
 
-#define HEADER_VIEW_HEIGHT 132
+#define HEADER_VIEW_HEIGHT 215
 
 @interface UserViewController ()
 
@@ -30,6 +32,8 @@
     NSArray *cellArray;
     NSString *userName;
     NSString *userAvatar;
+    
+    UIView *bgView;
 }
 
 @synthesize userId;
@@ -44,12 +48,16 @@
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
     self.userTableView.dataSource = self;
     self.userTableView.delegate = self;
-//    self.navigationController.navigationBarBackgroundHidden = YES;
+    self.navigationBarBackgroundHidden = YES;
     self.navigationController.fullScreenInteractivePopGestureRecognizer = YES;
     
     cellArray = @[];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAvatar) name:@"refreshAvatar" object:nil];
+    
+    bgView = [[UIView alloc] init];
+    bgView.backgroundColor = [UIColor flatMintColor];
+    [self.view addSubview:bgView];
     
     /*
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)] && self.navigationController.navigationBar.translucent == YES) {
@@ -73,6 +81,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     if (self.navigationController.viewControllers[0] == self) {
         self.title = @"我";
         if ([data shareInstance].myUID != nil) {
@@ -83,14 +94,34 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [bgView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
     [self refreshData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    self.navigationController.navigationBar.tintColor = [wjAppearanceManager mainTintColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    
     UserHeaderView *headerView = (UserHeaderView *)self.userTableView.tableHeaderView;
     [headerView setFrame:CGRectMake(0, 0, self.view.frame.size.width, HEADER_VIEW_HEIGHT)];
     [headerView layoutSubviews];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        if (UIInterfaceOrientationIsPortrait(fromInterfaceOrientation)) {
+            [bgView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+        } else {
+            [bgView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+        }
+    } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [bgView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -188,17 +219,26 @@
     if (section == 0) {
         if (row == 0) {
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)userData.questionCount];
+            cell.imageView.image = [UIImage imageNamed:@"tableQues"];
         } else if (row == 1) {
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)userData.answerCount];
+            cell.imageView.image = [UIImage imageNamed:@"tableAns"];
+        } else if (row == 2) {
+            cell.imageView.image = [UIImage imageNamed:@"tableFocQue"];
+        } else if (row == 3) {
+            cell.imageView.image = [UIImage imageNamed:@"tableFocTop"];
         }
     } else if (section == 1) {
         if (row == 0) {
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)userData.friendCount];
+            cell.imageView.image = [UIImage imageNamed:@"tableFocUser"];
         } else {
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)userData.fansCount];
+            cell.imageView.image = [UIImage imageNamed:@"tableUser"];
         }
     } else if (section == 2) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.imageView.image = [UIImage imageNamed:@"tableDraft"];
     }
     return cell;
 }
@@ -244,7 +284,7 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     } else if (section == 2) {
         if (row == 0) {
-            DraftTableViewController *draftTableController = [[DraftTableViewController alloc] initWithStyle:UITableViewStylePlain];
+            DraftPageController *draftTableController = [[DraftPageController alloc] init];
             draftTableController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:draftTableController animated:YES];
             [tableView deselectRowAtIndexPath:indexPath animated:YES];

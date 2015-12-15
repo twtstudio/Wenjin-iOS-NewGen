@@ -17,8 +17,11 @@
 + (UIColor *)questionTitleLabelTextColor;
 + (UIColor *)userActionTextColor;
 + (UIColor *)buttonColor;
-+ (UIColor *)segmentedSelectedColor;
-+ (UIColor *)segmentedUnselectedColor;
-+ (UIColor *)segmentedUnselectedTextColor;
+
++ (CGFloat)pageMenuHeight;
++ (UIColor *)pageShadowColor;
++ (CGSize)pageShadowOffset;
++ (CGFloat)pageShadowOpacity;
++ (CGFloat)pageShadowRadius;
 
 @end

@@ -14,7 +14,7 @@
 #import "SearchCell.h"
 #import "UserListTableViewCell.h"
 #import "SearchQuestionTableViewCell.h"
-#import "NSTimer+Blocks.h"
+#import "BlocksKit.h"
 #import "QuestionViewController.h"
 #import "UserViewController.h"
 #import "TopicViewController.h"
@@ -104,8 +104,11 @@
     if (txtField.text.length > 0) {
         searchString = txtField.text;
         [txtField resignFirstResponder];
+        [MsgDisplay dismiss];
+        [MsgDisplay showLoading];
         [self getSearchData];
     } else {
+        [MsgDisplay dismiss];
         [MsgDisplay showErrorMsg:@"请输入搜索关键字"];
     }
 }
@@ -122,6 +125,7 @@
     [SearchDataManager getSearchDataWithQuery:searchString type:searchType page:currentPage success:^(NSArray *_rowsData) {
         if (searchType == typeMarker) {
             if (currentPage == 1) {
+                [MsgDisplay dismiss];
                 [rowsData removeAllObjects];
                 rowsData = [_rowsData mutableCopy];
                 [resultsTableView reloadData];
@@ -129,11 +133,14 @@
             } else {
                 if (_rowsData.count == 0) {
                     if (rowsData.count <= 10) {
-                        
+                        [MsgDisplay dismiss];
+                        [resultsTableView reloadData];
                     } else {
+                        [MsgDisplay dismiss];
                         [MsgDisplay showErrorMsg:@"已到最后一页"];
                     }
                 } else {
+                    [MsgDisplay dismiss];
                     [rowsData addObjectsFromArray:_rowsData];
                     [resultsTableView reloadData];
                 }
@@ -146,13 +153,13 @@
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    [NSTimer scheduledTimerWithTimeInterval:0.3 block:^{
+    [NSTimer bk_scheduledTimerWithTimeInterval:0.3 block:^(NSTimer *timer) {
         bottomConstraint.constant = 0;
     } repeats:NO];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    [NSTimer scheduledTimerWithTimeInterval:0.3 block:^{
+    [NSTimer bk_scheduledTimerWithTimeInterval:0.3 block:^(NSTimer *timer) {
         CGFloat keyboardHeight = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
         bottomConstraint.constant = keyboardHeight;
     } repeats:NO];

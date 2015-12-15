@@ -23,10 +23,10 @@
 @implementation NotificationManager
 
 + (void)getUnreadNotificationNumberWithSuccess:(void (^)(NSUInteger, NSUInteger))success failure:(void (^)(NSString *))failure {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"platform": @"ios"};
-    [manager GET:[wjAPIs notificationNumber] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[wjAPIs notificationNumber] parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dicData = (NSDictionary *)responseObject;
         if ([dicData[@"errno"] isEqual:@1]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -37,7 +37,7 @@
                 failure(dicData[@"err"]);
             });
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             failure(error.localizedDescription);
         });
@@ -50,13 +50,13 @@
                                  @"limit": @10,
                                  @"page": [NSNumber numberWithInteger:page],
                                  @"platform": @"ios"};
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [manager GET:[wjAPIs notificationList] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[wjAPIs notificationList] parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;
         if ([responseDic[@"errno"] isEqual:@1]) {
-            NSArray *rows = [NotificationCell objectArrayWithKeyValuesArray:(responseDic[@"rsm"])[@"rows"]];
+            NSArray *rows = [NotificationCell mj_objectArrayWithKeyValuesArray:(responseDic[@"rsm"])[@"rows"]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 success(rows);
             });
@@ -66,7 +66,7 @@
             });
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             failure(error.localizedDescription);
         });
@@ -77,23 +77,23 @@
 + (void)readNotificationWithNotificationID:(NSInteger)notificationId {
     NSDictionary *parameters = @{@"notification_id": [NSString stringWithFormat:@"%ld", (long)notificationId],
                                  @"platform": @"ios"};
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [manager GET:[wjAPIs readNotification] parameters:parameters success:nil failure:nil];
+    [manager GET:[wjAPIs readNotification] parameters:parameters progress:nil success:nil failure:nil];
 }
 
 + (void)readAllNotificationsWithCompletionBlock:(void (^)())block {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [manager GET:[wjAPIs readNotification] parameters:@{@"platform": @"ios"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[wjAPIs readNotification] parameters:@{@"platform": @"ios"} progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         block();
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
     }];
 }
 
 + (void)handleNotification:(NSDictionary *)dic {
-    Notification *notification = [Notification objectWithKeyValues:dic];
+    Notification *notification = [Notification mj_objectWithKeyValues:dic];
     
     UIViewController *appRootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
     UIViewController *topVC = appRootVC;
