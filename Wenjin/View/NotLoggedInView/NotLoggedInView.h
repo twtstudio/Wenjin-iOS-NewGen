@@ -12,6 +12,8 @@
 
 - (void)presentLoginController;
 
+- (void)presentRegisterController;
+
 @end
 
 @interface NotLoggedInView : UIView<UIScrollViewDelegate, UIScrollViewAccessibilityDelegate>

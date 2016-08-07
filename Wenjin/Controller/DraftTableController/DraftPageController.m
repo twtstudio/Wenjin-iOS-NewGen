@@ -9,6 +9,7 @@
 #import "DraftPageController.h"
 #import "wjAppearanceManager.h"
 #import "DraftTableViewController.h"
+#import "JZNavigationExtension.h"
 
 @interface DraftPageController ()
 
@@ -22,8 +23,8 @@
     if (self) {
         self.viewControllerClasses = @[[DraftTableViewController class], [DraftTableViewController class]];
         self.titles = @[@"问题", @"答案"];
-        self.keys = @[@"draftType", @"draftType"];
-        self.values = @[@0, @1];
+        self.keys = [@[@"draftType", @"draftType"] mutableCopy];
+        self.values = [@[@0, @1] mutableCopy];
         
         // customization
         self.pageAnimatable = YES;
@@ -46,6 +47,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"草稿箱";
+    self.jz_navigationBarBackgroundHidden = NO;
     
     // Appearance Customization
     self.menuView.layer.shadowColor = [wjAppearanceManager pageShadowColor].CGColor;

@@ -42,6 +42,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //slk bug fix
+    [self registerPrefixesForAutoCompletion:@[@"#"]];
+    
     rowsData = [[NSMutableArray alloc] init];
     
 //    self.clearsSelectionOnViewWillAppear = YES;
@@ -55,6 +58,7 @@
     self.keyboardPanningEnabled = YES;
     self.shouldScrollToBottomAfterKeyboardShows = NO;
     self.inverted = NO;
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     currentPage = 1;
     

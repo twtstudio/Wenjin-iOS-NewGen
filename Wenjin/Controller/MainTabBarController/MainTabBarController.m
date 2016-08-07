@@ -9,13 +9,16 @@
 #import "MainTabBarController.h"
 #import "wjCookieManager.h"
 #import "wjDatabaseManager.h"
-#import "LoginViewController.h"
 #import "data.h"
 #import "wjCacheManager.h"
 #import "wjAccountManager.h"
 #import <KVOController/FBKVOController.h>
 #import "NotificationManager.h"
 #import "APService.h"
+#import <KVOController/NSObject+FBKVOController.h>
+#import "AccountViewController.h"
+#import "wjAPIs.h"
+#import "MsgDisplay.h"
 
 @interface MainTabBarController ()
 
@@ -49,6 +52,7 @@
         } else {
             for (UIView *view in self.view.subviews) {
                 if ([view isKindOfClass:[NotLoggedInView class]]) {
+                    
                     [view removeFromSuperview];
                 }
             }
@@ -69,7 +73,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    NSLog(@"logged in? %d", [wjAccountManager userIsLoggedIn]);
     if (![wjAccountManager userIsLoggedIn]) {
         [self setValue:@YES forKey:@"showNotLoggedInView"];
     } else {
@@ -91,7 +95,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - Pricate Method
+#pragma mark - Private Method
 
 - (void)refreshNotification {
     if ([wjAccountManager userIsLoggedIn]) {
@@ -114,10 +118,27 @@
 #pragma mark - NotLoggedInViewDelegate
 
 - (void)presentLoginController {
-    LoginViewController *login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    /*LoginViewController *login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     [login setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    [self presentViewController:login animated:YES completion:nil];
+    [self presentViewController:login animated:YES completion:nil];*/
+    
+    AccountViewController *acountVC = [[AccountViewController alloc]initWithAddress: [wjAPIs loginURL]];
+    [acountVC setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentViewController:acountVC animated:YES completion:nil];
 }
+
+- (void)presentRegisterController {
+    
+    //[MsgDisplay showErrorMsg:@"暂时没有这个功能"];
+    AccountViewController *acountVC = [[AccountViewController alloc]initWithAddress: [wjAPIs registerURL]];
+    [acountVC setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentViewController:acountVC animated:YES completion:nil];
+    
+    /*AcountWebViewController *acountVC = [[AcountWebViewController alloc]initWithAddress: @"http://login.twtstudio.com"];
+    [acountVC setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentViewController:acountVC animated:YES completion:nil];*/
+}
+
 
 /*
 #pragma mark - Navigation

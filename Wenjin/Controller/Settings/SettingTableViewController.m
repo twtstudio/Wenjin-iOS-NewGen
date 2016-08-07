@@ -12,6 +12,8 @@
 #import "FeedbackViewController.h"
 #import "data.h"
 #import "ShowNotLoggedInViewController.h"
+#import "BlocksKit+UIKit.h"
+#import "JZNavigationExtension.h"
 
 @interface SettingTableViewController ()
 
@@ -30,6 +32,8 @@
     cellValues = @[@[@"关于问津", @"反馈", @"引导页面"], @[@"回答后自动关注"], @[@"注销帐号"]];
     
     autoFocusKey = @"autoFocus";
+    
+    self.jz_navigationBarBackgroundHidden = NO;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -51,13 +55,15 @@
         [self.navigationController.tabBarController setSelectedIndex:0];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }];
     [logoutAlert addAction:cancelAction];
     [logoutAlert addAction:confirmAction];
-    [logoutAlert setModalPresentationStyle:UIModalPresentationPopover];
-    logoutAlert.popoverPresentationController.permittedArrowDirections = 0;
-    logoutAlert.popoverPresentationController.sourceView = self.view;
-    logoutAlert.popoverPresentationController.sourceRect = self.view.frame;
+    logoutAlert.modalPresentationStyle = UIModalPresentationPopover;
+    logoutAlert.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    logoutAlert.popoverPresentationController.sourceView = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+    logoutAlert.popoverPresentationController.sourceRect = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]].bounds;
     [self presentViewController:logoutAlert animated:YES completion:nil];
 }
 
@@ -130,22 +136,20 @@
             }
             UISwitch *autoFocusSwitch = [[UISwitch alloc]init];
             autoFocusSwitch.on = ([defaults integerForKey:autoFocusKey] == 1) ? YES : NO;
-            [autoFocusSwitch addTarget:self action:@selector(autoFocusSwitchChanged:) forControlEvents:UIControlEventValueChanged];
+            [autoFocusSwitch bk_addEventHandler:^(UISwitch *sender) {
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                if (sender.on == YES) {
+                    [defaults setInteger:1 forKey:autoFocusKey];
+                } else {
+                    [defaults setInteger:0 forKey:autoFocusKey];
+                }
+            } forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = autoFocusSwitch;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
     }
     
     return cell;
-}
-
-- (void)autoFocusSwitchChanged:(UISwitch *)sender {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (sender.on == YES) {
-        [defaults setInteger:1 forKey:autoFocusKey];
-    } else {
-        [defaults setInteger:0 forKey:autoFocusKey];
-    }
 }
 
 

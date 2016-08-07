@@ -12,12 +12,12 @@ pod 'PopMenu'
 pod 'DZNEmptyDataSet'
 pod 'ChameleonFramework'
 pod 'SlackTextViewController'
-pod 'SVWebViewController', :head
+pod 'SVWebViewController'
 pod 'JZNavigationExtension'
 pod 'WebViewJavascriptBridge'
-pod 'MWPhotoBrowser'
-pod 'CRToast'
-pod "FDStackView", "1.0-alpha"
+pod 'IDMPhotoBrowser'
+pod 'SVProgressHUD'
+pod 'FDStackView'
 pod 'FMDB'
 
 target 'Wenjin' do

@@ -30,6 +30,33 @@
                                                        UIUserNotificationTypeAlert)
                                            categories:nil];
     [APService setupWithOption:launchOptions];
+    
+    // RongCloud
+//    [[RCIM sharedRCIM] initWithAppKey:[wjAPIs rongCloudAppKey]];
+    
+    /*NSString *strName = [[UIDevice currentDevice] name];
+    NSLog(@"设备名称：%@", strName);//e.g. "My iPhone"
+    
+    NSString *strSysName = [[UIDevice currentDevice] systemName];
+    NSLog(@"系统名称：%@", strSysName);// e.g. @"iOS"
+    
+    NSString *strSysVersion = [[UIDevice currentDevice] systemVersion];
+    NSLog(@"系统版本号：%@", strSysVersion);// e.g. @"4.0"
+    
+    NSString *strModel = [[UIDevice currentDevice] model];
+    NSLog(@"设备模式：%@", strModel);// e.g. @"iPhone", @"iPod touch"
+    
+    NSString *strLocModel = [[UIDevice currentDevice] localizedModel];
+    NSLog(@"本地设备模式：%@", strLocModel);// localized version of model //地方型号  （国际化区域名称）
+    
+    NSString* phoneModel = [[UIDevice currentDevice] model];
+    NSLog(@"手机型号: %@",phoneModel );   //手机型号*/
+    
+    //NSString *newUA = @"Wenjin/2.2.1 (iPad; iOS 9.3.3; Scale/2.00)";
+    NSString *newUA = [NSString stringWithFormat:@"Wenjin/%@ (%@; iOS %@; Scale/2.00)", [data appVersion], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent": newUA}];
+
+    
     return YES;
 }
 
@@ -61,7 +88,49 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [WXApi handleOpenURL:url delegate:self];
+    NSLog(@"%@", [url scheme]);
+    NSLog(@"%@", [url query]);
+    
+    if ([[url scheme] isEqualToString:@"wenjin"]) {
+        NSMutableDictionary *queryDic = [[NSMutableDictionary alloc] init];
+        NSArray *urlComponents = [[url query] componentsSeparatedByString:@"&"];
+        for (NSString *keyValuePair in urlComponents) {
+            NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
+            NSString *key = [[pairComponents firstObject] stringByRemovingPercentEncoding];
+            NSString *value = [[pairComponents lastObject] stringByRemovingPercentEncoding];
+            [queryDic setObject:value forKey:key];
+        }
+        
+        // 构造一个假的 notification 对象从而可以直接调用处理通知的方法
+        // 当然这种方法只是偷懒，之后需要重构
+        NSMutableDictionary *fakeNotification = [[NSMutableDictionary alloc] init];
+        if ([queryDic objectForKey:@"user"] != nil) {
+            [fakeNotification setValue:[queryDic objectForKey:@"user"] forKey:@"id"];
+            [fakeNotification setValue:@"0" forKey:@"nid"];
+            [fakeNotification setValue:@"101" forKey:@"type"];
+            [NotificationManager handleNotification:fakeNotification];
+        } else if ([queryDic objectForKey:@"question"] != nil) {
+            [fakeNotification setValue:[queryDic objectForKey:@"question"] forKey:@"id"];
+            [fakeNotification setValue:@"0" forKey:@"nid"];
+            [fakeNotification setValue:@"104" forKey:@"type"];
+            [NotificationManager handleNotification:fakeNotification];
+        } else if ([queryDic objectForKey:@"answer"] != nil) {
+            [fakeNotification setValue:[queryDic objectForKey:@"answer"] forKey:@"id"];
+            [fakeNotification setValue:@"0" forKey:@"nid"];
+            [fakeNotification setValue:@"102" forKey:@"type"];
+            [NotificationManager handleNotification:fakeNotification];
+        } else if ([queryDic objectForKey:@"article"] != nil) {
+            [fakeNotification setValue:[queryDic objectForKey:@"article"] forKey:@"id"];
+            [fakeNotification setValue:@"0" forKey:@"nid"];
+            [fakeNotification setValue:@"117" forKey:@"type"];
+            [NotificationManager handleNotification:fakeNotification];
+        } else {
+            return NO;
+        }
+        return YES;
+    } else {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
 }
 
 // WeChat SDK Delegate
@@ -93,7 +162,6 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
-    // IOS 7 Support Required
     [APService handleRemoteNotification:userInfo];
     // Process UserInfo
     // UserInfo 结构如下：

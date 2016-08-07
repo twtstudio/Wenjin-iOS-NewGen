@@ -7,7 +7,6 @@
 //
 
 #import "NotLoggedInView.h"
-#import "LoginViewController.h"
 #import "wjAccountManager.h"
 #import <POP/POP.h>
 #import <BlocksKit/BlocksKit+UIKit.h>
@@ -16,6 +15,7 @@
 @implementation NotLoggedInView {
     UIScrollView *backgroundScrollView;
     UIScrollView *foregroundScrollView;
+    UIButton *registerBtn;
     UIButton *loginBtn;
     UIPageControl *pageControl;
     
@@ -73,7 +73,7 @@
         [foregroundScrollView addSubview:imgView3];
         
         loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [loginBtn setTitle:@"进入问津" forState:UIControlStateNormal];
+        [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
         [loginBtn setFrame:CGRectMake(0.5 * deviceWidth - 0.5 * btnWidth, btnOriginHeightBefore, btnWidth, btnHeight)];
         [loginBtn setTintColor:[UIColor whiteColor]];
         [loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -88,6 +88,24 @@
         [loginBtn setAlpha:0.0];
         [loginBtn setUserInteractionEnabled:NO];
         [self addSubview:loginBtn];
+        
+        registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [registerBtn setTitle:@"注册" forState:UIControlStateNormal];
+        [registerBtn setFrame:CGRectMake(0.5 * deviceWidth - 0.5 * btnWidth, btnOriginHeightBefore+10+btnHeight, btnWidth, btnHeight)];
+        [registerBtn setTintColor:[UIColor whiteColor]];
+        [registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [registerBtn.layer setCornerRadius:7.0];
+        [registerBtn setClipsToBounds:YES];
+        [registerBtn bk_addEventHandler:^(id sender) {
+            [delegate presentRegisterController];
+        } forControlEvents:UIControlEventTouchUpInside];
+        [registerBtn setBackgroundColor:[UIColor clearColor]];
+        [registerBtn.layer setBorderColor:[UIColor whiteColor].CGColor];
+        [registerBtn.layer setBorderWidth:1.0];
+        [registerBtn setAlpha:0.0];
+        [registerBtn setUserInteractionEnabled:NO];
+        [self addSubview:registerBtn];
+        
         
         pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(self.frame.size.width/2, deviceHeight - 20, 0, 0)];
         [pageControl setNumberOfPages:3];
@@ -118,9 +136,16 @@
                 [loginBtn setUserInteractionEnabled:YES];
                 [loginBtn setAlpha:offSetX * 2 / deviceWidth - 3.0];
                 [loginBtn setFrame:CGRectMake(0.5 * deviceWidth - 0.5 * btnWidth, (btnOriginHeightAfter - btnOriginHeightBefore) * offSetX / (0.5 * deviceWidth) + 4 * btnOriginHeightBefore - 3 * btnOriginHeightAfter, btnWidth, btnHeight)];
+                
+                
+                [registerBtn setUserInteractionEnabled:YES];
+                [registerBtn setAlpha:offSetX * 2 / deviceWidth - 3.0];
+                [registerBtn setFrame:CGRectMake(0.5 * deviceWidth - 0.5 * btnWidth, (btnOriginHeightAfter - btnOriginHeightBefore) * offSetX / (0.5 * deviceWidth)+10+btnHeight + 4 * btnOriginHeightBefore - 3 * btnOriginHeightAfter, btnWidth, btnHeight)];
             } else {
                 [loginBtn setUserInteractionEnabled:NO];
                 [loginBtn setAlpha:0.0];
+                [registerBtn setUserInteractionEnabled:NO];
+                [registerBtn setAlpha:0.0];
             }
         }
     }

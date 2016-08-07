@@ -124,11 +124,19 @@
 // 搜索
 + (NSString *)search;
 
+// 获取私信 token
++ (NSString *)getMessageToken;
+
 // Bug HD Key
-+ (NSString *)firKey;
+//+ (NSString *)firKey; 
 
 // WeChat
 + (NSString *)wechatAppID;
 + (NSString *)wechatAppSecret;
+// RongCloud
++ (NSString *)rongCloudAppKey;
 
+//新版单点登录网站
++ (NSString *)loginURL;
++ (NSString *)registerURL;
 @end
