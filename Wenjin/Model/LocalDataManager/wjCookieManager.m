@@ -11,7 +11,18 @@
 @implementation wjCookieManager
 
 + (void)saveCookieForURLString:(NSString *)urlStr andKey:(NSString *)key {
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:urlStr]];
+
+    NSMutableArray *cookies = [NSMutableArray arrayWithArray:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:urlStr]]];
+    //NSLog(@"😀%lu", (unsigned long)cookies.count);
+    /*
+    if ([cookies count] > 2) {
+        for (NSInteger i = 0; i < [cookies count] - 2; ++i) {
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookies[i]];
+            
+            [cookies removeObjectAtIndex:i];
+        }
+    }
+    */
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:key];
 }

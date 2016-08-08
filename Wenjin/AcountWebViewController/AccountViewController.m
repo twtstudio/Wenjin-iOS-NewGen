@@ -53,6 +53,18 @@
         [self.navigationController setNavigationBarHidden:YES animated:animated];
     }
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    
+    //delete previous cookies that could be bad
+    NSArray *fooCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    if ([fooCookies count] > 0) {
+        for(NSHTTPCookie *cookie in fooCookies) {
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+            NSLog(@"Kicked some villains out!");
+        }
+    } else {
+        NSLog(@"No villain was found");
+    }
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle {
@@ -140,6 +152,10 @@
         [self.navigationController setNavigationBarHidden:NO animated:animated];
     }
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    
+    
+    NSLog(@"Cleared!");
     
     
 }
