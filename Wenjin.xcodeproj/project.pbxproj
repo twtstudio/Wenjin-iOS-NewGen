@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2344E8F9AC4EFEBDACE5C85E /* libPods-Wenjin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2019FF32A0DDB9F5AC8EFFE /* libPods-Wenjin.a */; };
+		37B76203DB805B55C9D33566 /* libPods-WenjinTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0818C188677C4CC77FB0AFD /* libPods-WenjinTests.a */; };
 		6847712C1D3FAC7900DEC800 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847712B1D3FAC7900DEC800 /* AccountViewController.m */; };
-		692B21E4F093C20FCD959A1D /* libPods-WenjinTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0D1099C8DDB316651BEEEC6 /* libPods-WenjinTests.a */; };
-		CEAC78454DE31F233B236693 /* libPods-Wenjin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F560F9136F127C9F06BF2A /* libPods-Wenjin.a */; };
+		B129C09E1D58B72100623ED6 /* log.swift in Sources */ = {isa = PBXBuildFile; fileRef = B129C09D1D58B72100623ED6 /* log.swift */; };
 		E9025AE61BBEBD2200AEF430 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9025AE21BBEBD2200AEF430 /* libWeChatSDK.a */; };
 		E90968371AF0B79B00E65F7E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E90968361AF0B79B00E65F7E /* SystemConfiguration.framework */; };
 		E90968391AF0B7A600E65F7E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E90968381AF0B7A600E65F7E /* libz.dylib */; };
@@ -164,13 +165,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0225B6A19D3FC7BE8D8EB969 /* Pods-Wenjin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wenjin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin.release.xcconfig"; sourceTree = "<group>"; };
-		29FF249C4CCA60D98405BAA3 /* Pods-WenjinTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenjinTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests.release.xcconfig"; sourceTree = "<group>"; };
-		392A968ADA093B0BE666D0B8 /* Pods-Wenjin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wenjin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin.debug.xcconfig"; sourceTree = "<group>"; };
-		51B1958D19CFB3FFEF90BB6A /* Pods-WenjinTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenjinTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests.debug.xcconfig"; sourceTree = "<group>"; };
+		360B66E1459BE9926174788D /* Pods-WenjinTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenjinTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4F7D5269C01644DA7383C160 /* Pods-Wenjin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wenjin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin.release.xcconfig"; sourceTree = "<group>"; };
 		6847712A1D3FAC7900DEC800 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		6847712B1D3FAC7900DEC800 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
-		C5F560F9136F127C9F06BF2A /* libPods-Wenjin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Wenjin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0818C188677C4CC77FB0AFD /* libPods-WenjinTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WenjinTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B129C09C1D58B72000623ED6 /* Wenjin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wenjin-Bridging-Header.h"; sourceTree = "<group>"; };
+		B129C09D1D58B72100623ED6 /* log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = log.swift; sourceTree = "<group>"; };
+		D2019FF32A0DDB9F5AC8EFFE /* libPods-Wenjin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Wenjin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D66925E339117D033D879675 /* Pods-Wenjin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wenjin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin.debug.xcconfig"; sourceTree = "<group>"; };
 		E9025AE21BBEBD2200AEF430 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		E9025AE41BBEBD2200AEF430 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		E9025AE51BBEBD2200AEF430 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
@@ -410,7 +413,7 @@
 		E9F0FB231BD61374009E77F8 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = Controller/Search/SearchViewController.h; sourceTree = "<group>"; };
 		E9F0FB241BD61374009E77F8 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = Controller/Search/SearchViewController.m; sourceTree = "<group>"; };
 		E9FE84AD1B8C63D600482AE4 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F0D1099C8DDB316651BEEEC6 /* libPods-WenjinTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WenjinTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA2B1D896365DDF18A6DD8C3 /* Pods-WenjinTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenjinTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -449,7 +452,7 @@
 				E9D56EF81ADE2AD500C54466 /* QuartzCore.framework in Frameworks */,
 				E9D56EF41ADE2AC800C54466 /* Foundation.framework in Frameworks */,
 				E9D56EF21ADE2AC000C54466 /* UIKit.framework in Frameworks */,
-				CEAC78454DE31F233B236693 /* libPods-Wenjin.a in Frameworks */,
+				2344E8F9AC4EFEBDACE5C85E /* libPods-Wenjin.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,7 +460,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				692B21E4F093C20FCD959A1D /* libPods-WenjinTests.a in Frameworks */,
+				37B76203DB805B55C9D33566 /* libPods-WenjinTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,21 +499,10 @@
 				E9D56EF51ADE2ACE00C54466 /* CoreGraphics.framework */,
 				E9D56EF31ADE2AC800C54466 /* Foundation.framework */,
 				E9D56EF11ADE2AC000C54466 /* UIKit.framework */,
-				C5F560F9136F127C9F06BF2A /* libPods-Wenjin.a */,
-				F0D1099C8DDB316651BEEEC6 /* libPods-WenjinTests.a */,
+				D2019FF32A0DDB9F5AC8EFFE /* libPods-Wenjin.a */,
+				A0818C188677C4CC77FB0AFD /* libPods-WenjinTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		35D95D671D9BA1FDDB36717E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				392A968ADA093B0BE666D0B8 /* Pods-Wenjin.debug.xcconfig */,
-				0225B6A19D3FC7BE8D8EB969 /* Pods-Wenjin.release.xcconfig */,
-				51B1958D19CFB3FFEF90BB6A /* Pods-WenjinTests.debug.xcconfig */,
-				29FF249C4CCA60D98405BAA3 /* Pods-WenjinTests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		684771211D3F703200DEC800 /* AcountWebViewController */ = {
@@ -520,6 +512,17 @@
 				6847712B1D3FAC7900DEC800 /* AccountViewController.m */,
 			);
 			path = AcountWebViewController;
+			sourceTree = "<group>";
+		};
+		D8AEF2299B881A423B3477E0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D66925E339117D033D879675 /* Pods-Wenjin.debug.xcconfig */,
+				4F7D5269C01644DA7383C160 /* Pods-Wenjin.release.xcconfig */,
+				360B66E1459BE9926174788D /* Pods-WenjinTests.debug.xcconfig */,
+				FA2B1D896365DDF18A6DD8C3 /* Pods-WenjinTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		E9025AE11BBEBD2200AEF430 /* WXSDK */ = {
@@ -758,7 +761,7 @@
 				E9642EA71AC5714800FF7875 /* WenjinTests */,
 				E9642E8C1AC5714800FF7875 /* Products */,
 				12540291E620BDA86F3DB73E /* Frameworks */,
-				35D95D671D9BA1FDDB36717E /* Pods */,
+				D8AEF2299B881A423B3477E0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -970,12 +973,14 @@
 		E9C9C6E51AC694BB00CC228A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				B129C09D1D58B72100623ED6 /* log.swift */,
 				E9642E921AC5714800FF7875 /* AppDelegate.h */,
 				E9642E931AC5714800FF7875 /* AppDelegate.m */,
 				E9642E9D1AC5714800FF7875 /* LaunchScreen.xib */,
 				E9642E8E1AC5714800FF7875 /* Supporting Files */,
 				E9E286C71AC805F2005B6ED7 /* Localizable.strings */,
 				E9C804C61B0786390021C388 /* PushConfig.plist */,
+				B129C09C1D58B72000623ED6 /* Wenjin-Bridging-Header.h */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -1322,6 +1327,7 @@
 		E9642E831AC5714800FF7875 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "TWT Studio";
 				TargetAttributes = {
@@ -1538,6 +1544,7 @@
 				E992CA141AE10F75003A9123 /* wjAppearanceManager.m in Sources */,
 				E96F092F1AD7F44100847E5E /* SettingTableViewController.m in Sources */,
 				E9C9C6F61AC719FC00CC228A /* MainTabBarController.m in Sources */,
+				B129C09E1D58B72100623ED6 /* log.swift in Sources */,
 				E90F42781ACE6A4E00263622 /* UserHeaderView.m in Sources */,
 				E9C9C7181AC7256700CC228A /* wjCacheManager.m in Sources */,
 				E9C1A1C01ACAF21F00892B60 /* QuestionDataManager.m in Sources */,
@@ -1718,9 +1725,10 @@
 		};
 		E9642EAF1AC5714800FF7875 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 392A968ADA093B0BE666D0B8 /* Pods-Wenjin.debug.xcconfig */;
+			baseConfigurationReference = D66925E339117D033D879675 /* Pods-Wenjin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = YES;
@@ -1748,15 +1756,18 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.edu.twt.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Wenjin/Wenjin-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Resource/JPushSDK $(SRCROOT)/Resource/WXSDK";
 			};
 			name = Debug;
 		};
 		E9642EB01AC5714800FF7875 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0225B6A19D3FC7BE8D8EB969 /* Pods-Wenjin.release.xcconfig */;
+			baseConfigurationReference = 4F7D5269C01644DA7383C160 /* Pods-Wenjin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = YES;
@@ -1784,13 +1795,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.edu.twt.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Wenjin/Wenjin-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Resource/JPushSDK $(SRCROOT)/Resource/WXSDK";
 			};
 			name = Release;
 		};
 		E9642EB21AC5714800FF7875 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 51B1958D19CFB3FFEF90BB6A /* Pods-WenjinTests.debug.xcconfig */;
+			baseConfigurationReference = 360B66E1459BE9926174788D /* Pods-WenjinTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				ENABLE_BITCODE = NO;
@@ -1812,7 +1824,7 @@
 		};
 		E9642EB31AC5714800FF7875 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29FF249C4CCA60D98405BAA3 /* Pods-WenjinTests.release.xcconfig */;
+			baseConfigurationReference = FA2B1D896365DDF18A6DD8C3 /* Pods-WenjinTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				ENABLE_BITCODE = NO;
