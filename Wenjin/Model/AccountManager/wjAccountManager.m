@@ -45,6 +45,7 @@
 }
 
 + (void)logout {
+    NSLog(@"logout");
     [wjCookieManager removeCookieForKey:@"login"];
     [wjCacheManager removeCacheDataForKey:@"homeCache"];
     [wjCacheManager removeCacheDataForKey:@"userData"];
