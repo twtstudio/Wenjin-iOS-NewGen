@@ -53,9 +53,10 @@
     NSLog(@"手机型号: %@",phoneModel );   //手机型号*/
     
     //NSString *newUA = @"Wenjin/2.2.1 (iPad; iOS 9.3.3; Scale/2.00)";
-    NSString *newUA = [NSString stringWithFormat:@"Wenjin/%@ (%@; iOS %@; Scale/2.00)", [data appVersion], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion]];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent": newUA}];
+    NSString *newUA = [NSString stringWithFormat:@"Wenjin/%@ (%@; iOS %@; Scale/%.2lf)", [data appVersion], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion], [[UIScreen mainScreen] scale]];
 
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent": newUA}];
+    NSLog(@"fucker %f", [[UIScreen mainScreen] scale]);
     
     return YES;
 }

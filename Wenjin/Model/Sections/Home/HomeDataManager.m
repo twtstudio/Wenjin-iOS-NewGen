@@ -32,9 +32,11 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    
     [manager GET:[wjAPIs homeURL] parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;
+        //NSLog(@"%@", responseDic);
         if ([responseDic[@"errno"] isEqual: @1]) {
             NSArray *rows = [HomeCell mj_objectArrayWithKeyValuesArray:(responseDic[@"rsm"])[@"rows"]];
             if (page == 0) {
@@ -50,6 +52,7 @@
                 });
             }
         } else {
+            NSLog(@"achengg");
             dispatch_async(dispatch_get_main_queue(), ^{
                 failure(responseDic[@"err"]);
             });

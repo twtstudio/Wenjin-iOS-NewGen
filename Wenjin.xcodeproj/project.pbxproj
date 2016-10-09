@@ -10,7 +10,6 @@
 		2344E8F9AC4EFEBDACE5C85E /* libPods-Wenjin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2019FF32A0DDB9F5AC8EFFE /* libPods-Wenjin.a */; };
 		37B76203DB805B55C9D33566 /* libPods-WenjinTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0818C188677C4CC77FB0AFD /* libPods-WenjinTests.a */; };
 		6847712C1D3FAC7900DEC800 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847712B1D3FAC7900DEC800 /* AccountViewController.m */; };
-		B129C09E1D58B72100623ED6 /* log.swift in Sources */ = {isa = PBXBuildFile; fileRef = B129C09D1D58B72100623ED6 /* log.swift */; };
 		E9025AE61BBEBD2200AEF430 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9025AE21BBEBD2200AEF430 /* libWeChatSDK.a */; };
 		E90968371AF0B79B00E65F7E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E90968361AF0B79B00E65F7E /* SystemConfiguration.framework */; };
 		E90968391AF0B7A600E65F7E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E90968381AF0B7A600E65F7E /* libz.dylib */; };
@@ -171,7 +170,6 @@
 		6847712B1D3FAC7900DEC800 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		A0818C188677C4CC77FB0AFD /* libPods-WenjinTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WenjinTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B129C09C1D58B72000623ED6 /* Wenjin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wenjin-Bridging-Header.h"; sourceTree = "<group>"; };
-		B129C09D1D58B72100623ED6 /* log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = log.swift; sourceTree = "<group>"; };
 		D2019FF32A0DDB9F5AC8EFFE /* libPods-Wenjin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Wenjin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D66925E339117D033D879675 /* Pods-Wenjin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wenjin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin.debug.xcconfig"; sourceTree = "<group>"; };
 		E9025AE21BBEBD2200AEF430 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
@@ -973,7 +971,6 @@
 		E9C9C6E51AC694BB00CC228A /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				B129C09D1D58B72100623ED6 /* log.swift */,
 				E9642E921AC5714800FF7875 /* AppDelegate.h */,
 				E9642E931AC5714800FF7875 /* AppDelegate.m */,
 				E9642E9D1AC5714800FF7875 /* LaunchScreen.xib */,
@@ -1544,7 +1541,6 @@
 				E992CA141AE10F75003A9123 /* wjAppearanceManager.m in Sources */,
 				E96F092F1AD7F44100847E5E /* SettingTableViewController.m in Sources */,
 				E9C9C6F61AC719FC00CC228A /* MainTabBarController.m in Sources */,
-				B129C09E1D58B72100623ED6 /* log.swift in Sources */,
 				E90F42781ACE6A4E00263622 /* UserHeaderView.m in Sources */,
 				E9C9C7181AC7256700CC228A /* wjCacheManager.m in Sources */,
 				E9C1A1C01ACAF21F00892B60 /* QuestionDataManager.m in Sources */,

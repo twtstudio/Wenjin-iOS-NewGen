@@ -122,7 +122,9 @@
     } failure:^(NSString *errStr) {
         if ([errStr isEqualToString:@"请先登录或注册"]) {
             [MsgDisplay dismiss];
+            
             [wjAccountManager logout];
+            NSLog(@"asdasd");
             [self.tabBarController setValue:@YES forKey:@"showNotLoggedInView"];
         } else {
             [MsgDisplay showErrorMsg:errStr];
