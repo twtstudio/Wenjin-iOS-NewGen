@@ -14,7 +14,9 @@
 + (NSString *)getSummaryFromString:(NSString *)string lengthLimit:(NSInteger)limit;
 + (NSString *)filterHTMLWithString:(NSString *)s;
 + (NSString *)convertToBootstrapHTMLWithContent:(NSString *)contentStr;
++ (NSString *)convertToBootstrapHTMLWithContentDark:(NSString *)contentStr;
 + (NSString *)convertToBootstrapHTMLWithExtraBlankLinesWithContent:(NSString *)contentStr;
++ (NSString *)convertToBootstrapHTMLWithExtraBlankLinesWithContentDark:(NSString *)contentStr;
 + (NSString *)convertToBootstrapHTMLWithTimeWithContent:(NSString *)contentStr andTimeStamp:(NSInteger)timeStamp;
-
++ (NSString *)convertToBootstrapHTMLWithTimeWithContentDark:(NSString *)contentStr andTimeStamp:(NSInteger)timeStamp;
 @end

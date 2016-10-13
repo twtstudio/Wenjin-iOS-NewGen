@@ -27,9 +27,11 @@
 #import "WebViewJavascriptBridge.h"
 #import <SafariServices/SafariServices.h>
 #import "WebModalViewController.h"
+#import "wjAppearanceManager.h"
+#import "Wenjin-Swift.h"
 
 @interface QuestionViewController ()
-
+@property ThemeChangeManager *manager;
 @property WebViewJavascriptBridge *bridge;
 
 @end
@@ -93,6 +95,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleQuestionViewController:self];
     [questionTableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES];
     if (shouldRefresh) {
         [self.questionTableView triggerPullToRefresh];
@@ -117,6 +121,7 @@
         headerFrame.size.height = headerHeight;
         questionTableView.tableHeaderView.frame = headerFrame;
          */
+        [_manager handleQuestionHeaderView:headerView];
         questionTableView.tableHeaderView = headerView;
         [questionTableView reloadData];
         [questionTableView.pullToRefreshView stopAnimating];
@@ -155,11 +160,15 @@
     NSUInteger row = [indexPath row];
     AnswerInfo *tmp = (AnswerInfo *)questionAnswersData[row];
     cell.userNameLabel.text = tmp.nickName;
+    cell.userNameLabel.textColor = [wjAppearanceManager mainTintColor];
     cell.answerContentLabel.text = [wjStringProcessor processAnswerDetailString:tmp.answerContent];
     cell.agreeCountLabel.text = (tmp.agreeCount >= 1000) ? [NSString stringWithFormat:@"%ldK", (long)tmp.agreeCount] : [NSString stringWithFormat:@"%ld", (long)tmp.agreeCount];
     [cell loadAvatarWithURL:tmp.avatarFile];
     cell.userAvatarView.tag = row;
     cell.delegate = self;
+    
+    [_manager handleQuestionAnswerTableViewCell:cell];
+
     return cell;
 }
 

@@ -7,8 +7,11 @@
 //
 
 #import "CommentTextView.h"
+#import "Wenjin-Swift.h"
 
-@implementation CommentTextView
+@implementation CommentTextView{
+    ThemeChangeManager *manager;
+}
 
 - (instancetype) init {
     if (self = [super init]) {
@@ -19,11 +22,10 @@
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
-    
-    self.backgroundColor = [UIColor whiteColor];
+    manager = [[ThemeChangeManager alloc]init];
     
     self.placeholder = NSLocalizedString(@"请输入评论", nil);
-    self.placeholderColor = [UIColor lightGrayColor];
+    [manager handleCommentTextView:self];
     self.pastableMediaTypes = SLKPastableMediaTypeNone;
     
     self.layer.borderColor = [UIColor colorWithRed:217.0/255.0 green:217.0/255.0 blue:217.0/255.0 alpha:1.0].CGColor;

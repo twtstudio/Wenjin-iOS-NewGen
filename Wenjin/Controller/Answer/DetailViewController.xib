@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController">
@@ -12,6 +12,7 @@
                 <outlet property="answerContentView" destination="hfd-Ha-o5k" id="MIf-Cy-P9H"/>
                 <outlet property="commentItem" destination="78a-Ac-IP9" id="WBB-q2-y8L"/>
                 <outlet property="questionItem" destination="e3v-yJ-OoW" id="dgb-c8-K7d"/>
+                <outlet property="toolBar" destination="iHH-dC-5wF" id="ZA6-0b-iRv"/>
                 <outlet property="userAvatarView" destination="URu-vY-CRR" id="Evy-SJ-fqp"/>
                 <outlet property="userInfoView" destination="LML-qB-C5r" id="VF4-TR-ijr"/>
                 <outlet property="userNameLabel" destination="dGw-mV-eSB" id="Eb6-Y9-7l4"/>

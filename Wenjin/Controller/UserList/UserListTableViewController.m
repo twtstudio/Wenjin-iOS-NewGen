@@ -14,9 +14,11 @@
 #import "UserViewController.h"
 #import "UserInfo.h"
 #import "JZNavigationExtension.h"
+#import "Wenjin-Swift.h"
+#import "wjAppearanceManager.h"
 
 @interface UserListTableViewController ()
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation UserListTableViewController {
@@ -61,6 +63,18 @@
     }];
     [self.tableView triggerPullToRefresh];
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleNavigationBar:self];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.jz_navigationBarBackgroundHidden = YES;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -134,6 +148,9 @@
     cell.userNameLabel.text = tmp.nickName;
     cell.userSigLabel.text = tmp.signature;
     [cell loadImageWithApartURL:tmp.avatarFile];
+    
+    [_manager handleUserListTableViewCell:cell];
+    cell.userNameLabel.textColor = [wjAppearanceManager userActionTextColor];
     return cell;
 }
 

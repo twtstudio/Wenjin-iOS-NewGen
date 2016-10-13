@@ -19,6 +19,7 @@ pod 'IDMPhotoBrowser'
 pod 'SVProgressHUD'
 pod 'FDStackView'
 pod 'FMDB'
+pod 'DKNightVersion'
 
 target 'Wenjin' do
 

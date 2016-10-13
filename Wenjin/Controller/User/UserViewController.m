@@ -21,11 +21,13 @@
 #import "wjAppearanceManager.h"
 #import "DraftPageController.h"
 #import "Chameleon.h"
+#import "Wenjin-Swift.h"
+#import "SettingTableViewController.h"
 
 #define HEADER_VIEW_HEIGHT 215
 
 @interface UserViewController ()
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation UserViewController {
@@ -33,12 +35,13 @@
     NSString *userName;
     NSString *userAvatar;
     
-    UIView *bgView;
+    //UIView *bgView;
 }
 
 @synthesize userId;
 @synthesize userTableView;
 @synthesize userData;
+@synthesize bgView;
 
 #pragma mark - Life Cycle
 
@@ -50,14 +53,16 @@
     self.userTableView.delegate = self;
     
     self.jz_navigationBarBackgroundHidden = YES;
+    self.navigationController.navigationBar.backgroundColor = [UIColor flatMintColor];
+
     
     cellArray = @[];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAvatar) name:@"refreshAvatar" object:nil];
     
-    bgView = [[UIView alloc] init];
-    bgView.backgroundColor = [UIColor flatMintColor];
-    [self.view addSubview:bgView];
+    self.bgView = [[UIView alloc] init];
+    self.bgView.backgroundColor = [UIColor flatMintColor];
+    [self.view addSubview:self.bgView];
     
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)] && self.navigationController.navigationBar.translucent == YES) {
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -74,6 +79,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self.bgView setFrame:CGRectMake(0, 0, self.view.frame.size.width,64 )];
+    [self.view addSubview:self.bgView];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleTableView:self.userTableView];
+    
+    self.jz_navigationBarBackgroundHidden = YES;
+
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -83,19 +96,24 @@
             userId = [data shareInstance].myUID;
         }
     }
+    self.navigationController.navigationBar.backgroundColor = [UIColor flatMintColor];
+    [self refreshData];
+    [userTableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [bgView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+    //[bgView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
     [self refreshData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    [_manager handleDisappearNavBar:self];
+    //[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    self.jz_navigationBarBackgroundHidden = NO;
     self.navigationController.navigationBar.tintColor = [wjAppearanceManager mainTintColor];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
+    //[self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
@@ -132,6 +150,11 @@
         UIViewController *des = segue.destinationViewController;
         des.hidesBottomBarWhenPushed = YES;
     }
+    if ([segue.identifier isEqualToString:@"pushSetting"]) {
+        SettingTableViewController *vc = (SettingTableViewController *)segue.destinationViewController;
+        vc.fatherTabbarController = self.navigationController.tabBarController;
+    }
+
 }
 
 #pragma mark - Private Methods
@@ -145,6 +168,8 @@
             headerView.delegate = self;
             headerView.usernameLabel.text = userData.nickName;
             headerView.userSigLabel.text = userData.signature;
+             [_manager handleUserHeaderView:headerView];
+            
             NSUInteger agreeCount = userData.agreeCount;
             NSUInteger thanksCount = userData.thanksCount;
             headerView.agreeCountLabel.text = (agreeCount >= 1000) ? [NSString stringWithFormat:@"%luK", agreeCount/1000] : [NSString stringWithFormat:@"%ld", userData.agreeCount];
@@ -208,6 +233,9 @@
     }
     
     cell.textLabel.text = (cellArray[section])[row];
+    
+    [_manager handleUserViewControllerCell:cell];
+
     if (section == 0) {
         if (row == 0) {
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)userData.questionCount];

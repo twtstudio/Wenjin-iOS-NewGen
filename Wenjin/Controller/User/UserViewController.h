@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) UserInfo *userData;
-
+@property (strong, nonatomic) UIView *bgView;
 @property (weak, nonatomic) IBOutlet UITableView *userTableView;
 
 @end

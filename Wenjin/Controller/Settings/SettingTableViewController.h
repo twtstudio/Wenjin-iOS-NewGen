@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingTableViewController : UITableViewController
+@property (strong, nonatomic) UITabBarController *fatherTabbarController;
 
 @end

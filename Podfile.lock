@@ -33,6 +33,19 @@ PODS:
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
   - DACircularProgress (2.3.1)
+  - DKNightVersion (2.4.0):
+    - DKNightVersion/Core (= 2.4.0)
+    - DKNightVersion/CoreAnimation (= 2.4.0)
+    - DKNightVersion/UIKit (= 2.4.0)
+  - DKNightVersion/Core (2.4.0):
+    - DKNightVersion/Core/DeallocBlockExecutor (= 2.4.0)
+    - DKNightVersion/Core/extobjc (= 2.4.0)
+  - DKNightVersion/Core/DeallocBlockExecutor (2.4.0)
+  - DKNightVersion/Core/extobjc (2.4.0)
+  - DKNightVersion/CoreAnimation (2.4.0):
+    - DKNightVersion/Core
+  - DKNightVersion/UIKit (2.4.0):
+    - DKNightVersion/Core
   - DZNEmptyDataSet (1.8)
   - FDStackView (1.0)
   - FMDB (2.6.2):
@@ -65,6 +78,7 @@ DEPENDENCIES:
   - AFNetworking
   - BlocksKit
   - ChameleonFramework
+  - DKNightVersion
   - DZNEmptyDataSet
   - FDStackView
   - FMDB
@@ -87,6 +101,7 @@ SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  DKNightVersion: a46e6623767216cbff843192f9eac1a5aa177a44
   DZNEmptyDataSet: d2351b2e8daefa40433ef292e246e21f6be31a7b
   FDStackView: 3a4bbe0ce9c35e974246a585168b9da8c32213f1
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
@@ -106,6 +121,4 @@ SPEC CHECKSUMS:
   WebViewJavascriptBridge: a4d502315f1b8d9a51cd6a9174147ed567ec3bc5
   XHRealTimeBlur: 661fadd5691ba2d349758e8fd5fbdb499ac55f8c
 
-PODFILE CHECKSUM: 3ceaf41d6bcb77fda01ac90ba3d3a6b56c624a27
-
-COCOAPODS: 1.0.1
+COCOAPODS: 0.39.0

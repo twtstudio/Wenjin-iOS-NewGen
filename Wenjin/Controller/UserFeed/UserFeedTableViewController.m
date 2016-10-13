@@ -16,9 +16,10 @@
 #import "AnswerInfo.h"
 #import "FeedQuestion.h"
 #import "JZNavigationExtension.h"
+#import "Wenjin-Swift.h"
 
 @interface UserFeedTableViewController ()
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation UserFeedTableViewController {
@@ -70,6 +71,13 @@
     
     self.tableView.estimatedRowHeight = 93;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleNavigationBar:self];
+    [self refreshContent];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -170,6 +178,7 @@
     
     NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@ %@", userName, userAction]];
     [attriStr addAttribute:NSForegroundColorAttributeName value:[wjAppearanceManager userActionTextColor] range:NSMakeRange(0, userName.length)];
+    [_manager handleHomeTableViewCell:cell];
     cell.actionLabel.attributedText = attriStr;
     cell.questionLabel.text = title;
     cell.detailLabel.text = [wjStringProcessor getSummaryFromString:detail lengthLimit:70];

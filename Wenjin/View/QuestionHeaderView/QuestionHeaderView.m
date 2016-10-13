@@ -15,6 +15,7 @@
 #import "wjAppearanceManager.h"
 #import "FBKVOController.h"
 #import <SafariServices/SafariServices.h>
+#import "Wenjin-Swift.h"
 
 @implementation QuestionHeaderView {
     int _borderDist;
@@ -24,12 +25,13 @@
     UIButton *focusQuestion;
     UIButton *addAnswer;
     CGFloat width;
-    
+    ThemeChangeManager *manager;
     UIView *splitLine;
 }
 
 @synthesize delegate;
 @synthesize detailView;
+@synthesize questionTitle;
 
 - (id)init {
     if (self = [super init]) {
@@ -50,6 +52,7 @@
         for (TopicInfo *tmp in topics) {
             [topicsArr addObject:tmp.topicTitle];
         }
+        manager = [[ThemeChangeManager alloc]init];
         
         topicsControl = [[TLTagsControl alloc]initWithFrame:CGRectMake(16, 8, width - 32, 22)];
         // TLTagsControl *topicsControl = [[TLTagsControl alloc]init];
@@ -73,12 +76,13 @@
         CGSize questionFitSize = [questionTitle sizeThatFits:maxSize];
         questionTitle.frame = CGRectMake(_borderDist + 4, 42, width - 2 * _borderDist, questionFitSize.height + 20);
         [self addSubview:questionTitle];
+        [manager handleQuestionHeaderViewTitle:self];
         
         detailView = [[UIWebView alloc]init];
         [detailView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
         detailView.frame = CGRectMake(0, 42 + questionTitle.frame.size.height, width, 1);
         if (![questionInfo.questionDetail isEqualToString:@""]) {
-            [detailView loadHTMLString:[wjStringProcessor convertToBootstrapHTMLWithContent:questionInfo.questionDetail] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath] isDirectory:YES]];
+            [manager handleQuestionHeaderView:self];
             detailView.delegate = self;
         }
         detailView.hidden = NO;
