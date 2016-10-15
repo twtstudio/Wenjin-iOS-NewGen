@@ -25,9 +25,10 @@
 #import "UIScrollView+EmptyDataSet.h"
 #import "UINavigationController+JZExtension.h"
 #import <KVOController/NSObject+FBKVOController.h>
+#import "Wenjin-Swift.h"
 
 @interface TopicViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation TopicViewController {
@@ -122,6 +123,13 @@
     [self refreshContent];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleTopicViewController:self];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -211,6 +219,7 @@
         actionString = [NSString stringWithFormat:@"%@ 回答了问题", tmp.answerInfo.nickName];
     }
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:actionString];
+    [_manager handleHomeTableViewCell:cell];
     [str addAttribute:NSForegroundColorAttributeName value:[wjAppearanceManager userActionTextColor] range:NSMakeRange(0, [tmp.answerInfo.nickName length])];
     cell.actionLabel.attributedText = str;
     cell.questionLabel.text = [wjStringProcessor filterHTMLWithString:tmp.questionInfo.questionContent];

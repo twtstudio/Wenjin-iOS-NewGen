@@ -14,9 +14,10 @@
 #import "ShowNotLoggedInViewController.h"
 #import "BlocksKit+UIKit.h"
 #import "JZNavigationExtension.h"
+#import "Wenjin-Swift.h"
 
 @interface SettingTableViewController ()
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation SettingTableViewController {
@@ -29,17 +30,31 @@
     [super viewDidLoad];
     
     headerTitles = @[@"关于", @"设置", @"帐号"];
-    cellValues = @[@[@"关于问津", @"反馈", @"引导页面"], @[@"回答后自动关注"], @[@"注销帐号"]];
+    cellValues = @[@[@"关于问津", @"反馈", @"引导页面"], @[@"回答后自动关注",@"夜间模式"], @[@"注销帐号"]];
     
     autoFocusKey = @"autoFocus";
     
     self.jz_navigationBarBackgroundHidden = NO;
+    
+    [self.tableView reloadData];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleNavigationBar:self];
+    [self.tableView reloadData];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_manager handleFatherTabBarController:self.fatherTabbarController];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -124,6 +139,8 @@
     NSUInteger row = [indexPath row];
     cell.textLabel.text = ((NSArray *)(cellValues[section]))[row];
     
+     [_manager handleUserViewControllerCell:cell];
+    
     if (section == 0) {
         if (row == 0 || row == 1) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -145,6 +162,16 @@
                 }
             } forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = autoFocusSwitch;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        else if (row == 1){
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            UISwitch *changeThemeSwitch = [[UISwitch alloc]init];
+            changeThemeSwitch.on = ([[defaults objectForKey:@"Theme"] isEqualToString:@"night"]) ? YES : NO;
+            [changeThemeSwitch bk_addEventHandler:^(UISwitch *sender){
+                [_manager handleChangeThemeSwitchClicked:sender STVC:self];
+            }forControlEvents:UIControlEventValueChanged];
+            cell.accessoryView = changeThemeSwitch;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
     }

@@ -24,9 +24,10 @@
 #import "APService.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "UINavigationController+JZExtension.h"
+#import "Wenjin-Swift.h"
 
 @interface NotificationTableViewController () <homeTableViewCellDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation NotificationTableViewController {
@@ -92,6 +93,13 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleNavigationBar:self];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -227,6 +235,7 @@
     NSString *actionString = [NSString stringWithFormat:@"%@ %@", tmp.nickName, actionDic[actionType]];
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:actionString];
     [str addAttribute:NSForegroundColorAttributeName value:[wjAppearanceManager userActionTextColor] range:NSMakeRange(0, [tmp.nickName length])];
+    [_manager handleHomeTableViewCell:cell];
     cell.actionLabel.attributedText = str;
     cell.questionLabel.text = [wjStringProcessor filterHTMLWithString:tmp.title];
     //cell.detailLabel.text = (([actionType isEqualToString:@"102"] || [actionType isEqualToString:@"105"]) ? @"I NEED ANSWER DETAIL" : nil);

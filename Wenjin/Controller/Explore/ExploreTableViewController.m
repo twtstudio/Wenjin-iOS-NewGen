@@ -18,9 +18,10 @@
 #import "ExploreCell.h"
 #import "AnswerInfo.h"
 #import "UINavigationController+JZExtension.h"
+#import "Wenjin-Swift.h"
 
 @interface ExploreTableViewController ()
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation ExploreTableViewController {
@@ -79,6 +80,14 @@
     self.tableView.estimatedRowHeight = 93;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleNavigationBar:self];
+    [self.tableView reloadData];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -166,6 +175,8 @@
         AnswerInfo *answerInfo = [tmp.answerUsers objectAtIndex:0];
         NSString *actionString = [NSString stringWithFormat:@"%@ 回答了问题", answerInfo.nickName];
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:actionString];
+        
+         [_manager handleHomeTableViewCell:cell];
         [str addAttribute:NSForegroundColorAttributeName value:[wjAppearanceManager userActionTextColor] range:NSMakeRange(0, [answerInfo.nickName length])];
         cell.actionLabel.attributedText = str;
         cell.detailLabel.text = [wjStringProcessor processAnswerDetailString:answerInfo.answerContent];
@@ -181,6 +192,7 @@
             actionString = [NSString stringWithFormat:@"%@ 发布了文章", tmp.userInfo.nickName];
             cell.questionLabel.text = tmp.title;
         }
+        [_manager handleHomeTableViewCell:cell];
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:actionString];
         [str addAttribute:NSForegroundColorAttributeName value:[wjAppearanceManager userActionTextColor] range:NSMakeRange(0, [tmp.userInfo.nickName length])];
         cell.actionLabel.attributedText = str;

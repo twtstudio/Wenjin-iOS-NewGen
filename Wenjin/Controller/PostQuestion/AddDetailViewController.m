@@ -14,13 +14,14 @@
 #import "PostDataManager.h"
 #import "MsgDisplay.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "Wenjin-Swift.h"
 
 @interface AddDetailViewController ()
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation AddDetailViewController
-
+ UIToolbar *accessoryToolbar;
 @synthesize detailTextView;
 
 - (void)viewDidLoad {
@@ -39,7 +40,7 @@
     
     [detailTextView becomeFirstResponder];
     
-    UIToolbar *accessoryToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    accessoryToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     accessoryToolbar.barStyle = UIBarStyleDefault;
     accessoryToolbar.translucent = YES;
     
@@ -87,6 +88,9 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleAddDetailViewController:self accessoryToolbar:accessoryToolbar];
+
     // Dispose of any resources that can be recreated.
 }
 
@@ -94,7 +98,9 @@
     // float animationDuration = [[[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     [UIView animateWithDuration:0.3 animations:^{
         CGFloat keyboardHeight = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
-        [detailTextView setFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - keyboardHeight - 64)];
+        [_manager handleADVCkeyboard:self keyboardHeight:keyboardHeight];
+
+       // [detailTextView setFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - keyboardHeight - 64)];
     }];
 }
 

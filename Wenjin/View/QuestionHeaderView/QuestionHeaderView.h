@@ -37,6 +37,7 @@
 
 @property (assign, nonatomic) id<QuestionHeaderViewDelegate> delegate;
 @property (strong, nonatomic) UIWebView *detailView;
+@property UILabel *questionTitle;
 
 - (id)initWithQuestionInfo:(QuestionInfo *)questionInfo andTopics:(NSArray *)topics;
 

@@ -482,6 +482,21 @@ static CGFloat kWMMarginToNavigationItem = 6.0;
     [self.view layoutIfNeeded];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear: animated];
+    for (UIView *view in self.view.subviews){
+        if ([view isKindOfClass:[WMMenuView class]]){
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            if ([[defaults objectForKey:@"Theme"] isEqualToString:@"night"]){
+                view.backgroundColor = [UIColor colorWithRed:52/255.0 green:52/255.0 blue:52/255.0 alpha:1.0];
+            }else{
+                view.backgroundColor = self.menuBGColor;
+            }
+        }
+    }
+}
+
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self postFullyDisplayedNotificationWithCurrentIndex:self.selectIndex];

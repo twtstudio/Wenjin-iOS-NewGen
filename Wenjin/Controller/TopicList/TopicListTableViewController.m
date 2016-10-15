@@ -19,9 +19,10 @@
 #import "JZNavigationExtension.h"
 #import "SearchViewController.h"
 #import "TopicViewController.h"
+#import "Wenjin-Swift.h"
 
 @interface TopicListTableViewController ()
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation TopicListTableViewController {
@@ -76,6 +77,15 @@
     }];
     [self.tableView triggerPullToRefresh];
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleNavigationBar:self];
+    [self.tableView reloadData];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -172,6 +182,7 @@
     cell.userNameLabel.text = tmp.topicTitle;
     cell.userSigLabel.text = tmp.topicDescription;
     [cell loadTopicImageWithApartURL:tmp.topicPic];
+    [_manager handleUserListTableViewCell:cell];
     return cell;
 }
 

@@ -16,9 +16,11 @@
 #import "CommentInfo.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "CommentTextView.h"
+#import "Wenjin-Swift.h"
+#import "wjAppearanceManager.h"
 
 @interface CommentViewController () <DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation CommentViewController {
@@ -88,8 +90,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc] init];
+    [_manager handleCommentViewController:self];
     [self.tableView triggerPullToRefresh];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -206,7 +211,10 @@
         NSString *replyUserText = (tmp.atUid != 0) ? [NSString stringWithFormat:@"回复 %@：", tmp.atNickName] : @"";
         cell.commentLabel.text = [NSString stringWithFormat:@"%@%@", replyUserText, tmp.artComContent];
     }
+    cell.usernameLabel.textColor = [wjAppearanceManager mainTintColor];
     cell.transform = self.tableView.transform;
+    [_manager handleAnswerCommentTableViewCell:cell];
+
     return cell;
 }
 

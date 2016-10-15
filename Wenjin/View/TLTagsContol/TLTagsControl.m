@@ -7,9 +7,10 @@
 //
 
 #import "TLTagsControl.h"
+#import "Wenjin-Swift.h"
 
 @interface TLTagsControl () <UITextFieldDelegate, UIGestureRecognizerDelegate>
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation TLTagsControl {
@@ -77,7 +78,9 @@
     tagInputField_ = [[UITextField alloc] initWithFrame:self.frame];
     tagInputField_.layer.cornerRadius = 5;
     tagInputField_.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    tagInputField_.backgroundColor = [UIColor whiteColor];
+    //tagInputField_.backgroundColor = [UIColor whiteColor];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handletagInputField:tagInputField_];
     tagInputField_.delegate = self;
     tagInputField_.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
     tagInputField_.placeholder = @"tag";
@@ -279,6 +282,8 @@
             [tagInputField_ removeFromSuperview];
         }
     }
+    
+    tagInputField_.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"添加话题"attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
     
     [self setNeedsLayout];
 }

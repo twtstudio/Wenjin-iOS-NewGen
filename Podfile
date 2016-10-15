@@ -1,5 +1,6 @@
 platform :ios, '8.0'
 
+target 'Wenjin' do
 pod 'AFNetworking'
 pod 'pop'
 pod 'SVPullToRefresh'
@@ -19,8 +20,7 @@ pod 'IDMPhotoBrowser'
 pod 'SVProgressHUD'
 pod 'FDStackView'
 pod 'FMDB'
-
-target 'Wenjin' do
+pod 'DKNightVersion'
 
 end
 

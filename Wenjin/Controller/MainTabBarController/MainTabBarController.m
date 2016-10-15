@@ -19,6 +19,7 @@
 #import "AccountViewController.h"
 #import "wjAPIs.h"
 #import "MsgDisplay.h"
+#import "Wenjin-Swift.h"
 
 @interface MainTabBarController ()
 
@@ -79,6 +80,10 @@
     } else {
         [self setValue:@NO forKey:@"showNotLoggedInView"];
     }
+    
+    ThemeChangeManager *manager = [[ThemeChangeManager alloc] init];
+    [manager handleTabBar:self];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {

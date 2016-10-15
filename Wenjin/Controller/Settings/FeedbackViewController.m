@@ -11,9 +11,11 @@
 #import <BlocksKit/BlocksKit+UIKit.h>
 #import "MsgDisplay.h"
 #import "PostDataManager.h"
+#import "Wenjin-Swift.h"
+#import "JZNavigationExtension.h"
 
 @interface FeedbackViewController ()
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation FeedbackViewController
@@ -24,14 +26,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"反馈";
-    
+    self.jz_navigationBarBackgroundHidden = NO;
     formController = [[FXFormController alloc]init];
     formController.tableView = self.tableView;
+
     formController.delegate = self;
     formController.form = [[FeedbackForm alloc]init];
     
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] bk_initWithBarButtonSystemItem:UIBarButtonSystemItemDone handler:^(id weakSender) {
         FeedbackForm *form = (FeedbackForm *)self.formController.form;
+        NSLog(@"fjdskafhdjska;ndjsalbfvjdskalfhdjskl");
+        for (FXFormField *field in form.fields) {
+            NSLog(@"%@", field);
+            
+        }
+        
         NSString *titleStr = form.title;
         NSString *msgStr = form.message;
         if (titleStr.length > 0 && msgStr.length > 0) {
@@ -51,6 +60,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleTableView:self.tableView];
     [self.tableView reloadData];
 }
 
@@ -59,6 +70,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"fuckin Entered");
+//    if ([cell isKindOfClass:(FXFormTextFieldCell *)]) {
+//        [[FXFormTextFieldCell *cell textField] setKeyboardAppearance:UIKeyboardAppearanceDark];
+//    }
+    FXFormTextFieldCell *fooCell = cell;
+    if (fooCell != nil) {
+        [[fooCell textField] setKeyboardAppearance:UIKeyboardAppearanceDark];
+    }
+}
 /*
 #pragma mark - Navigation
 

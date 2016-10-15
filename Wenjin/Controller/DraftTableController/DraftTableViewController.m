@@ -15,6 +15,8 @@
 #import "PostAnswerViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "wjDatabaseManager.h"
+#import "Wenjin-Swift.h"
+#import "JZNavigationExtension.h"
 
 #define draftTypeQuestion 0
 #define draftTypeAnswer 1
@@ -22,7 +24,7 @@
 @interface DraftTableViewController () <DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 //@property (strong) RLMNotificationToken *token;
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation DraftTableViewController {
@@ -34,6 +36,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleNavigationBar:self];
+
     [self updateTable];
 }
 
@@ -63,6 +68,8 @@
     
     dataInTable = [[NSMutableArray alloc] init];
     dataArr = [[NSMutableArray alloc] init];
+    
+    self.jz_navigationBarBackgroundHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

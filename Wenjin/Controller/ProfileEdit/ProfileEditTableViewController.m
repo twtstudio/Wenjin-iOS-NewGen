@@ -12,9 +12,10 @@
 #import "wjAccountManager.h"
 #import "MsgDisplay.h"
 #import "JZNavigationExtension.h"
+#import "Wenjin-Swift.h"
 
 @interface ProfileEditTableViewController ()
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation ProfileEditTableViewController
@@ -23,6 +24,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleNavigationBar:self];
+
     [self.tableView reloadData];
 }
 
@@ -41,6 +45,11 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.jz_navigationBarBackgroundHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

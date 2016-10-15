@@ -25,9 +25,10 @@
 #import "TopicViewController.h"
 #import <CoreSpotlight/CoreSpotlight.h>
 #import "wjAPIs.h"
+#import "Wenjin-Swift.h"
 
 @interface HomeViewController () <DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation HomeViewController {
@@ -45,6 +46,9 @@
     if (shouldRefresh) {
         [self.tableView triggerPullToRefresh];
     }
+    _manager = [[ThemeChangeManager alloc] init];
+    [_manager handleNavigationBar:self];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -183,6 +187,8 @@
     }
     NSUInteger row = [indexPath row];
     HomeCell *tmp = dataInView[row];
+    [_manager handleHomeTableViewCell:cell];
+
     if (tmp.topicInfo.topicId == 0) {
         // 不是话题的
         NSString *actionIDString = [NSString stringWithFormat:@"%ld", (long)tmp.associateAction];

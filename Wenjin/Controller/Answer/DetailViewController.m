@@ -30,18 +30,11 @@
 #import <SafariServices/SafariServices.h>
 #import "WebModalViewController.h"
 #import <KVOController/NSObject+FBKVOController.h>
+#import "Wenjin-Swift.h"
 
 @interface DetailViewController ()<IDMPhotoBrowserDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *userAvatarView;
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *userSigLabel;
-@property (weak, nonatomic) IBOutlet UIButton *agreeBtn;
-@property (weak, nonatomic) IBOutlet UIWebView *answerContentView;
-@property (weak, nonatomic) IBOutlet UIView *userInfoView;
-@property (weak, nonatomic) IBOutlet UIImageView *agreeImageView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *commentItem;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *questionItem;
+@property ThemeChangeManager *manager;
 @property WebViewJavascriptBridge *bridge;
 
 @property (nonatomic) NSInteger agreeCount;
@@ -174,9 +167,11 @@
             NSString *ans = [wjStringProcessor processAnswerDetailString:content];
             NSString *ansStr = (ans.length > 60) ? [NSString stringWithFormat:@"%@...", [ans substringToIndex:60]] : ans;
             summaryString = [NSString stringWithFormat:@"%@ 的回答：%@", nickName, ansStr];
-            
             [self updateView];
-            
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:userNameLabel.text];
+            [str addAttribute:NSForegroundColorAttributeName value:[wjAppearanceManager userActionTextColor] range:NSMakeRange(0, [userNameLabel.text length])];
+            userNameLabel.attributedText = str;
+
         } failure:^(NSString *errStr) {
             [MsgDisplay showErrorMsg:errStr];
         }];
@@ -198,11 +193,22 @@
             summaryString = [NSString stringWithFormat:@"%@：%@", titleString, ansStr];
             
             [self updateView];
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:userNameLabel.text];
+            [str addAttribute:NSForegroundColorAttributeName value:[wjAppearanceManager userActionTextColor] range:NSMakeRange(0, [userNameLabel.text length])];
+            userNameLabel.attributedText = str;
         } failure:^(NSString *errorStr) {
             [MsgDisplay showErrorMsg:errorStr];
         }];
     }
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleDetailViewController:self];
+    [_manager handleUserInfoView:self];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -233,9 +239,10 @@
 - (void)updateView {
     NSString *processedHTML;
     if (detailType == DetailTypeAnswer) {
-        processedHTML = [wjStringProcessor convertToBootstrapHTMLWithTimeWithContent:content andTimeStamp:timeStamp];
+        processedHTML = [_manager handleHTMLWithTimeWithContent:content timeStamp:timeStamp];
+        
     } else {
-        processedHTML = [wjStringProcessor convertToBootstrapHTMLWithExtraBlankLinesWithContent:content];
+        processedHTML = [_manager handleHTMLWithExtraBlankLinesWithContent:content];
     }
     [answerContentView loadHTMLString:processedHTML baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath] isDirectory:YES]];
     

@@ -111,6 +111,32 @@
     return load;
 }
 
++ (NSString *)convertToBootstrapHTMLWithContentDark:(NSString *)contentStr {
+    contentStr = [self replaceHTMLLabelsFromContent:contentStr];
+    
+    NSString *load = [NSString stringWithFormat:@"<!DOCTYPE html> \n"
+                      "<html> \n"
+                      "<head> \n"
+                      "<meta charset=\"utf-8\"> \n"
+                      "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> \n"
+                      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> \n"
+                      "<link href=\"bootstrap.css\" rel=\"stylesheet\"> \n"
+                      "</head> \n"
+                      "<body style=\"background:#343434;color:#fff\"> \n"
+                      "<div class=\"container\"> \n"
+                      "<div class=\"row\"> \n"
+                      "<div class=\"col-sm-12\" style=\"font-size:16px;\"> \n"
+                      "%@ \n"
+                      "</div></div></div> \n"
+                      "<script src=\"bootstrap.min.js\"></script> \n"
+                      "<script src=\"jquery.min.js\"></script> \n"
+                      "<script src=\"bridge.js\"></script> \n"
+                      "</body> \n"
+                      "</html>" , contentStr];
+    
+    return load;
+}
+
 + (NSString *)convertToBootstrapHTMLWithExtraBlankLinesWithContent:(NSString *)contentStr {
 
     contentStr = [self replaceHTMLLabelsFromContent:contentStr];
@@ -124,6 +150,33 @@
                       "<link href=\"bootstrap.css\" rel=\"stylesheet\"> \n"
                       "</head> \n"
                       "<body> \n"
+                      "<div class=\"container\"> \n"
+                      "<div class=\"row\"> \n"
+                      "<div class=\"col-sm-12\" style=\"font-size: 16px;\"><br><br><br> \n" // 这个 br 用来换行到 userInfoView 以下
+                      "%@ \n"
+                      "</div></div><br><br></div> \n" // 这个 br 用于不被 toolbar 遮挡
+                      "<script src=\"bootstrap.min.js\"></script> \n"
+                      "<script src=\"jquery.min.js\"></script> \n"
+                      "<script src=\"bridge.js\" type=\"text/javascript\"></script> \n"
+                      "</body> \n"
+                      "</html>" , contentStr];
+    
+    return load;
+}
+
++ (NSString *)convertToBootstrapHTMLWithExtraBlankLinesWithContentDark:(NSString *)contentStr {
+    
+    contentStr = [self replaceHTMLLabelsFromContent:contentStr];
+    
+    NSString *load = [NSString stringWithFormat:@"<!DOCTYPE html> \n"
+                      "<html> \n"
+                      "<head> \n"
+                      "<meta charset=\"utf-8\"> \n"
+                      "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> \n"
+                      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> \n"
+                      "<link href=\"bootstrap.css\" rel=\"stylesheet\"> \n"
+                      "</head> \n"
+                      "<body style=\"background:#343434;color:#fff\"> \n"
                       "<div class=\"container\"> \n"
                       "<div class=\"row\"> \n"
                       "<div class=\"col-sm-12\" style=\"font-size: 16px;\"><br><br><br> \n" // 这个 br 用来换行到 userInfoView 以下
@@ -155,6 +208,39 @@
                       "<link href=\"bootstrap.css\" rel=\"stylesheet\"> \n"
                       "</head> \n"
                       "<body> \n"
+                      "<div class=\"container\"> \n"
+                      "<div class=\"row\"> \n"
+                      "<div class=\"col-sm-12\" style=\"font-size: 16px;\"><br><br><br> \n" // 这个 br 用来换行到 userInfoView 以下
+                      "%@ \n"
+                      "</div><br>"
+                      "<div class=\"col-sm-12\" style=\"font-size: 16px; text-align: right; color: #999999;\">%@</div></div>"
+                      "<br><br><br></div> \n" // 这个 br 用于不被 toolbar 遮挡
+                      "<script src=\"bootstrap.min.js\"></script> \n"
+                      "<script src=\"jquery.min.js\"></script> \n"
+                      "<script src=\"bridge.js\" type=\"text/javascript\"></script> \n"
+                      "</body> \n"
+                      "</html>" , contentStr, dateString];
+    
+    return load;
+}
+
++ (NSString *)convertToBootstrapHTMLWithTimeWithContentDark:(NSString *)contentStr andTimeStamp:(NSInteger)timeStamp {
+    contentStr = [self replaceHTMLLabelsFromContent:contentStr];
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeStamp];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    
+    NSString *load = [NSString stringWithFormat:@"<!DOCTYPE html> \n"
+                      "<html> \n"
+                      "<head> \n"
+                      "<meta charset=\"utf-8\"> \n"
+                      "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> \n"
+                      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> \n"
+                      "<link href=\"bootstrap.css\" rel=\"stylesheet\"> \n"
+                      "</head> \n"
+                      "<body style=\"background:#343434;color:#fff\"> \n"
                       "<div class=\"container\"> \n"
                       "<div class=\"row\"> \n"
                       "<div class=\"col-sm-12\" style=\"font-size: 16px;\"><br><br><br> \n" // 这个 br 用来换行到 userInfoView 以下

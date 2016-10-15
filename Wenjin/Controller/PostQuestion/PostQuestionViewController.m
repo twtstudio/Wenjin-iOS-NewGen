@@ -18,9 +18,11 @@
 #import "wjAppearanceManager.h"
 #import "NYSegmentedControl.h"
 #import "wjDatabaseManager.h"
+#import "Wenjin-Swift.h"
+#import "JZNavigationExtension.h"
 
 @interface PostQuestionViewController ()
-
+@property ThemeChangeManager * manager;
 @end
 
 @implementation PostQuestionViewController {
@@ -29,6 +31,7 @@
     
     TLTagsControl *questionTagsControl;
     NYSegmentedControl *isAnonymousControl;
+     UIToolbar *accessoryToolbar;
 }
 
 @synthesize questionView;
@@ -53,13 +56,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    UIToolbar *accessoryToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    accessoryToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     accessoryToolbar.barStyle = UIBarStyleDefault;
     accessoryToolbar.translucent = YES;
     
     isAnonymousControl = [[NYSegmentedControl alloc]initWithItems:@[@"不匿名", @"匿名"]];
-    isAnonymousControl.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
-    isAnonymousControl.segmentIndicatorBackgroundColor = [UIColor whiteColor];
+    //isAnonymousControl.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
+    //isAnonymousControl.segmentIndicatorBackgroundColor = [UIColor whiteColor];
     isAnonymousControl.segmentIndicatorInset = 0.0f;
     isAnonymousControl.titleTextColor = [UIColor lightGrayColor];
     isAnonymousControl.selectedTitleTextColor = [wjAppearanceManager mainTintColor];
@@ -101,6 +104,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [questionView becomeFirstResponder];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handlePostQuestionViewController:self questionTagsController:questionTagsControl accessoryToolbar:accessoryToolbar isAnonymousControl:isAnonymousControl];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -115,8 +120,9 @@
     // float animationDuration = [[[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     [UIView animateWithDuration:0.3 animations:^{
         CGFloat keyboardHeight = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
-        [questionView setFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - keyboardHeight - tagsControlHeight - 4 - 64)];
-        [questionTagsControl setFrame:CGRectMake(8, questionView.frame.size.height + 64, self.view.frame.size.width - 16, tagsControlHeight)];
+        [_manager handlePQVCkeyboard:self keyboardHeight:keyboardHeight tagControlHeight:tagsControlHeight questionTagsControl:questionTagsControl];
+      //  [questionView setFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - keyboardHeight - tagsControlHeight - 4 - 64)];
+       // [questionTagsControl setFrame:CGRectMake(8, questionView.frame.size.height + 64, self.view.frame.size.width - 16, tagsControlHeight)];
     }];
     
 }

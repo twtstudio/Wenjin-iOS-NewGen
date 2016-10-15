@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2344E8F9AC4EFEBDACE5C85E /* libPods-Wenjin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2019FF32A0DDB9F5AC8EFFE /* libPods-Wenjin.a */; };
-		37B76203DB805B55C9D33566 /* libPods-WenjinTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0818C188677C4CC77FB0AFD /* libPods-WenjinTests.a */; };
+		645201AB1DAFB79200813F7F /* wjAPIs.m in Sources */ = {isa = PBXBuildFile; fileRef = 645201AA1DAFB79200813F7F /* wjAPIs.m */; };
+		649489061DAE155100F9D419 /* ChangeTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649489051DAE155000F9D419 /* ChangeTheme.swift */; };
+		6552BD48B7A3462433D706ED /* libPods-Wenjin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F568CAD88500D678A59B675 /* libPods-Wenjin.a */; };
 		6847712C1D3FAC7900DEC800 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847712B1D3FAC7900DEC800 /* AccountViewController.m */; };
+		BF9812D227D09E036E85AAF6 /* libPods-WenjinTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB71D1E22E39D19FE047C832 /* libPods-WenjinTests.a */; };
 		E9025AE61BBEBD2200AEF430 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9025AE21BBEBD2200AEF430 /* libWeChatSDK.a */; };
 		E90968371AF0B79B00E65F7E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E90968361AF0B79B00E65F7E /* SystemConfiguration.framework */; };
 		E90968391AF0B7A600E65F7E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E90968381AF0B7A600E65F7E /* libz.dylib */; };
@@ -98,7 +100,6 @@
 		E9C9C6F31AC6B39200CC228A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C9C6F21AC6B39200CC228A /* HomeViewController.m */; };
 		E9C9C6F61AC719FC00CC228A /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C9C6F51AC719FC00CC228A /* MainTabBarController.m */; };
 		E9C9C6FE1AC71D4A00CC228A /* data.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C9C6FD1AC71D4A00CC228A /* data.m */; };
-		E9C9C7071AC71E3600CC228A /* wjAPIs.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C9C7061AC71E3600CC228A /* wjAPIs.m */; };
 		E9C9C70A1AC71E4200CC228A /* wpyEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C9C7091AC71E4200CC228A /* wpyEncryption.m */; };
 		E9C9C7111AC7233B00CC228A /* wjAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C9C7101AC7233B00CC228A /* wjAccountManager.m */; };
 		E9C9C7151AC7249900CC228A /* MsgDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C9C7141AC7249900CC228A /* MsgDisplay.m */; };
@@ -164,14 +165,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		360B66E1459BE9926174788D /* Pods-WenjinTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenjinTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests.debug.xcconfig"; sourceTree = "<group>"; };
-		4F7D5269C01644DA7383C160 /* Pods-Wenjin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wenjin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin.release.xcconfig"; sourceTree = "<group>"; };
+		0A39587B50BBB1AF400175A1 /* Pods-WenjinTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenjinTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5F568CAD88500D678A59B675 /* libPods-Wenjin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Wenjin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		645201AA1DAFB79200813F7F /* wjAPIs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = wjAPIs.m; path = Model/Security/wjAPIs.m; sourceTree = "<group>"; };
+		649489051DAE155000F9D419 /* ChangeTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTheme.swift; sourceTree = "<group>"; };
 		6847712A1D3FAC7900DEC800 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		6847712B1D3FAC7900DEC800 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
-		A0818C188677C4CC77FB0AFD /* libPods-WenjinTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WenjinTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EDFA088A505B8A3D7BF0D06 /* Pods-WenjinTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenjinTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests.release.xcconfig"; sourceTree = "<group>"; };
+		AA56BCBC59B997DF8F7D9721 /* Pods-Wenjin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wenjin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin.debug.xcconfig"; sourceTree = "<group>"; };
+		AC5F4224133175597A140CE8 /* Pods-Wenjin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wenjin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin.release.xcconfig"; sourceTree = "<group>"; };
 		B129C09C1D58B72000623ED6 /* Wenjin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wenjin-Bridging-Header.h"; sourceTree = "<group>"; };
-		D2019FF32A0DDB9F5AC8EFFE /* libPods-Wenjin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Wenjin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D66925E339117D033D879675 /* Pods-Wenjin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wenjin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin.debug.xcconfig"; sourceTree = "<group>"; };
 		E9025AE21BBEBD2200AEF430 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		E9025AE41BBEBD2200AEF430 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		E9025AE51BBEBD2200AEF430 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
@@ -333,7 +336,6 @@
 		E9C9C6FC1AC71D4A00CC228A /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = data.h; path = Model/shareInstance/data.h; sourceTree = "<group>"; };
 		E9C9C6FD1AC71D4A00CC228A /* data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = data.m; path = Model/shareInstance/data.m; sourceTree = "<group>"; };
 		E9C9C7051AC71E3600CC228A /* wjAPIs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wjAPIs.h; path = Model/Security/wjAPIs.h; sourceTree = "<group>"; };
-		E9C9C7061AC71E3600CC228A /* wjAPIs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = wjAPIs.m; path = Model/Security/wjAPIs.m; sourceTree = "<group>"; };
 		E9C9C7081AC71E4200CC228A /* wpyEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wpyEncryption.h; path = Model/Security/wpyEncryption.h; sourceTree = "<group>"; };
 		E9C9C7091AC71E4200CC228A /* wpyEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = wpyEncryption.m; path = Model/Security/wpyEncryption.m; sourceTree = "<group>"; };
 		E9C9C70F1AC7233B00CC228A /* wjAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wjAccountManager.h; path = Model/AccountManager/wjAccountManager.h; sourceTree = "<group>"; };
@@ -411,7 +413,7 @@
 		E9F0FB231BD61374009E77F8 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = Controller/Search/SearchViewController.h; sourceTree = "<group>"; };
 		E9F0FB241BD61374009E77F8 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = Controller/Search/SearchViewController.m; sourceTree = "<group>"; };
 		E9FE84AD1B8C63D600482AE4 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		FA2B1D896365DDF18A6DD8C3 /* Pods-WenjinTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenjinTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests.release.xcconfig"; sourceTree = "<group>"; };
+		EB71D1E22E39D19FE047C832 /* libPods-WenjinTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WenjinTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -450,7 +452,7 @@
 				E9D56EF81ADE2AD500C54466 /* QuartzCore.framework in Frameworks */,
 				E9D56EF41ADE2AC800C54466 /* Foundation.framework in Frameworks */,
 				E9D56EF21ADE2AC000C54466 /* UIKit.framework in Frameworks */,
-				2344E8F9AC4EFEBDACE5C85E /* libPods-Wenjin.a in Frameworks */,
+				6552BD48B7A3462433D706ED /* libPods-Wenjin.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,13 +460,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37B76203DB805B55C9D33566 /* libPods-WenjinTests.a in Frameworks */,
+				BF9812D227D09E036E85AAF6 /* libPods-WenjinTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		027B684B92CBFA641D01A1A8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AA56BCBC59B997DF8F7D9721 /* Pods-Wenjin.debug.xcconfig */,
+				AC5F4224133175597A140CE8 /* Pods-Wenjin.release.xcconfig */,
+				0A39587B50BBB1AF400175A1 /* Pods-WenjinTests.debug.xcconfig */,
+				6EDFA088A505B8A3D7BF0D06 /* Pods-WenjinTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		12540291E620BDA86F3DB73E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,8 +510,8 @@
 				E9D56EF51ADE2ACE00C54466 /* CoreGraphics.framework */,
 				E9D56EF31ADE2AC800C54466 /* Foundation.framework */,
 				E9D56EF11ADE2AC000C54466 /* UIKit.framework */,
-				D2019FF32A0DDB9F5AC8EFFE /* libPods-Wenjin.a */,
-				A0818C188677C4CC77FB0AFD /* libPods-WenjinTests.a */,
+				5F568CAD88500D678A59B675 /* libPods-Wenjin.a */,
+				EB71D1E22E39D19FE047C832 /* libPods-WenjinTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -510,17 +523,6 @@
 				6847712B1D3FAC7900DEC800 /* AccountViewController.m */,
 			);
 			path = AcountWebViewController;
-			sourceTree = "<group>";
-		};
-		D8AEF2299B881A423B3477E0 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D66925E339117D033D879675 /* Pods-Wenjin.debug.xcconfig */,
-				4F7D5269C01644DA7383C160 /* Pods-Wenjin.release.xcconfig */,
-				360B66E1459BE9926174788D /* Pods-WenjinTests.debug.xcconfig */,
-				FA2B1D896365DDF18A6DD8C3 /* Pods-WenjinTests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		E9025AE11BBEBD2200AEF430 /* WXSDK */ = {
@@ -759,7 +761,7 @@
 				E9642EA71AC5714800FF7875 /* WenjinTests */,
 				E9642E8C1AC5714800FF7875 /* Products */,
 				12540291E620BDA86F3DB73E /* Frameworks */,
-				D8AEF2299B881A423B3477E0 /* Pods */,
+				027B684B92CBFA641D01A1A8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1023,6 +1025,7 @@
 				E93063BB1ACA4D83000140C1 /* PostQuestion */,
 				E99079041ACECC97008DCA22 /* PostAnswer */,
 				E9DCE9491B5D4B0100076CA3 /* WebViewController */,
+				649489051DAE155000F9D419 /* ChangeTheme.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1081,7 +1084,7 @@
 			isa = PBXGroup;
 			children = (
 				E9C9C7051AC71E3600CC228A /* wjAPIs.h */,
-				E9C9C7061AC71E3600CC228A /* wjAPIs.m */,
+				645201AA1DAFB79200813F7F /* wjAPIs.m */,
 				E9C9C7081AC71E4200CC228A /* wpyEncryption.h */,
 				E9C9C7091AC71E4200CC228A /* wpyEncryption.m */,
 			);
@@ -1281,12 +1284,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E9642EAE1AC5714800FF7875 /* Build configuration list for PBXNativeTarget "Wenjin" */;
 			buildPhases = (
-				994CF07F9A118753A2F70577 /* [CP] Check Pods Manifest.lock */,
+				D0DF38173A1430BBBFED71F5 /* [CP] Check Pods Manifest.lock */,
 				E9642E871AC5714800FF7875 /* Sources */,
 				E9642E881AC5714800FF7875 /* Frameworks */,
 				E9642E891AC5714800FF7875 /* Resources */,
-				99B2B5FE824B93D7E8DB91C2 /* [CP] Embed Pods Frameworks */,
-				855C3CBE602B1755BB84FFB3 /* [CP] Copy Pods Resources */,
+				B461D3B104E8DDA111AC4372 /* [CP] Embed Pods Frameworks */,
+				30EEB1C4420C8552EE4BE3BE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1301,12 +1304,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E9642EB11AC5714800FF7875 /* Build configuration list for PBXNativeTarget "WenjinTests" */;
 			buildPhases = (
-				1C06B0D72E4BD26D45170069 /* [CP] Check Pods Manifest.lock */,
+				431394CC7DF7479270CE9685 /* [CP] Check Pods Manifest.lock */,
 				E9642EA01AC5714800FF7875 /* Sources */,
 				E9642EA11AC5714800FF7875 /* Frameworks */,
 				E9642EA21AC5714800FF7875 /* Resources */,
-				C3315A01A8B818067135C654 /* [CP] Embed Pods Frameworks */,
-				24262658C77748E24AED5AFD /* [CP] Copy Pods Resources */,
+				0A5F448876B9A00430B831E7 /* [CP] Embed Pods Frameworks */,
+				BCDCE0F2E614EC09851E5C5C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1331,6 +1334,7 @@
 					E9642E8A1AC5714800FF7875 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = TYRRVX7RWJ;
+						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1404,37 +1408,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1C06B0D72E4BD26D45170069 /* [CP] Check Pods Manifest.lock */ = {
+		0A5F448876B9A00430B831E7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		24262658C77748E24AED5AFD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		855C3CBE602B1755BB84FFB3 /* [CP] Copy Pods Resources */ = {
+		30EEB1C4420C8552EE4BE3BE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1449,7 +1438,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		994CF07F9A118753A2F70577 /* [CP] Check Pods Manifest.lock */ = {
+		431394CC7DF7479270CE9685 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1461,10 +1450,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		99B2B5FE824B93D7E8DB91C2 /* [CP] Embed Pods Frameworks */ = {
+		B461D3B104E8DDA111AC4372 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1479,19 +1468,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C3315A01A8B818067135C654 /* [CP] Embed Pods Frameworks */ = {
+		BCDCE0F2E614EC09851E5C5C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D0DF38173A1430BBBFED71F5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1511,7 +1515,6 @@
 				E90F1C581C1ACA03007E110A /* WMScrollView.m in Sources */,
 				E93C6D9D1BD62B5400688A7A /* SearchDetail.m in Sources */,
 				E9D602131B47E09000C95B35 /* QuestionDraft.m in Sources */,
-				E9C9C7071AC71E3600CC228A /* wjAPIs.m in Sources */,
 				E9EB618F1ACC2B2D001F5DA3 /* DetailDataManager.m in Sources */,
 				E952E1671AE520DE00F8B7BF /* FeedbackForm.m in Sources */,
 				E93063B51ACA3982000140C1 /* HomeTableViewCell.m in Sources */,
@@ -1539,6 +1542,7 @@
 				E952E16A1AE522D500F8B7BF /* FeedbackViewController.m in Sources */,
 				E9F0FB251BD61374009E77F8 /* SearchViewController.m in Sources */,
 				E992CA141AE10F75003A9123 /* wjAppearanceManager.m in Sources */,
+				649489061DAE155100F9D419 /* ChangeTheme.swift in Sources */,
 				E96F092F1AD7F44100847E5E /* SettingTableViewController.m in Sources */,
 				E9C9C6F61AC719FC00CC228A /* MainTabBarController.m in Sources */,
 				E90F42781ACE6A4E00263622 /* UserHeaderView.m in Sources */,
@@ -1574,6 +1578,7 @@
 				E93063D21ACAAB81000140C1 /* QuestionViewController.m in Sources */,
 				E90F42741ACD979500263622 /* UserDataManager.m in Sources */,
 				E91270771B00A7F500E32110 /* NotificationManager.m in Sources */,
+				645201AB1DAFB79200813F7F /* wjAPIs.m in Sources */,
 				E90F1C561C1ACA03007E110A /* WMMenuView.m in Sources */,
 				E92388F01B4695A000C3EE3A /* ProfileEditForm.m in Sources */,
 				E9479EE31AE2AB42003BCE97 /* AboutViewController.m in Sources */,
@@ -1721,7 +1726,7 @@
 		};
 		E9642EAF1AC5714800FF7875 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D66925E339117D033D879675 /* Pods-Wenjin.debug.xcconfig */;
+			baseConfigurationReference = AA56BCBC59B997DF8F7D9721 /* Pods-Wenjin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1754,13 +1759,14 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Wenjin/Wenjin-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Resource/JPushSDK $(SRCROOT)/Resource/WXSDK";
 			};
 			name = Debug;
 		};
 		E9642EB01AC5714800FF7875 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F7D5269C01644DA7383C160 /* Pods-Wenjin.release.xcconfig */;
+			baseConfigurationReference = AC5F4224133175597A140CE8 /* Pods-Wenjin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1792,13 +1798,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Wenjin/Wenjin-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Resource/JPushSDK $(SRCROOT)/Resource/WXSDK";
 			};
 			name = Release;
 		};
 		E9642EB21AC5714800FF7875 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 360B66E1459BE9926174788D /* Pods-WenjinTests.debug.xcconfig */;
+			baseConfigurationReference = 0A39587B50BBB1AF400175A1 /* Pods-WenjinTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				ENABLE_BITCODE = NO;
@@ -1820,7 +1827,7 @@
 		};
 		E9642EB31AC5714800FF7875 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA2B1D896365DDF18A6DD8C3 /* Pods-WenjinTests.release.xcconfig */;
+			baseConfigurationReference = 6EDFA088A505B8A3D7BF0D06 /* Pods-WenjinTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				ENABLE_BITCODE = NO;

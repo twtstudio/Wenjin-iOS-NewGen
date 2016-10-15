@@ -17,13 +17,15 @@
 #import "wjAppearanceManager.h"
 #import "wjDatabaseManager.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "Wenjin-Swift.h"
 
 @interface PostAnswerViewController ()
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation PostAnswerViewController {
     NYSegmentedControl *isAnonymousControl;
+     UIToolbar *accessoryToolbar;
 }
 
 @synthesize answerView;
@@ -108,7 +110,7 @@
     answerView.font = [UIFont systemFontOfSize:17.0];
     [self.view addSubview:answerView];
     
-    UIToolbar *accessoryToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    accessoryToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     accessoryToolbar.barStyle = UIBarStyleDefault;
     accessoryToolbar.translucent = YES;
     
@@ -166,6 +168,12 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(attachUploadFinished:) name:@"attachIDCompleted" object:nil];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handlePostAnswerViewController:self accessoryToolbar:accessoryToolbar isAnonymousControl:isAnonymousControl];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -18,13 +18,14 @@
 #import "QuestionViewController.h"
 #import "UserViewController.h"
 #import "TopicViewController.h"
+#import "Wenjin-Swift.h"
 
 #define SEARCH_TYPE_QUESTIONS 0
 #define SEARCH_TYPE_TOPICS 1
 #define SEARCH_TYPE_USERS 2
 
 @interface SearchViewController ()<UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
-
+@property ThemeChangeManager *manager;
 @end
 
 @implementation SearchViewController {
@@ -71,6 +72,12 @@
     [resultsTableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf nextPage];
     }];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _manager = [[ThemeChangeManager alloc]init];
+    [_manager handleSearchViewController:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -205,6 +212,7 @@
         cell.userNameLabel.text = tmp.name;
         cell.userSigLabel.text = tmp.detail.signature;
         [cell loadImageWithURL:tmp.detail.avatarFile];
+        [_manager handleUserListTableViewCell:cell];
         return cell;
     } else if ([tmp.type isEqualToString:@"topics"]) {
         static NSString *cellIdentifier = @"reuseTopicIdentifier";
@@ -217,6 +225,7 @@
         cell.userNameLabel.text = tmp.name;
         cell.userSigLabel.text = tmp.detail.topicDescription;
         [cell loadImageWithURL:tmp.detail.topicPic];
+        [_manager handleUserListTableViewCell:cell];
         return cell;
     } else {
         // Questions
@@ -230,6 +239,7 @@
         cell.focusCountLabel.text = [NSString stringWithFormat:@"%ld", tmp.detail.focusCount];
         cell.answerCountLabel.text = [NSString stringWithFormat:@"%ld", tmp.detail.answerCount];
 //        [cell loadImageWithURL:tmp.detail.topicPic];
+        [_manager handleSearchQuestionTableViewCell:cell];
         return cell;
     }
 }
