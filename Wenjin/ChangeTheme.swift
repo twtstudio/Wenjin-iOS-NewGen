@@ -17,440 +17,403 @@ import UIKit
     let NavigationBgColorNight = UIColor(red: CGFloat(79/255.0), green: CGFloat(79/255.0), blue: CGFloat(79/255.0), alpha: CGFloat(1.0))
     let searchTextFieldBgColor = UIColor(red: CGFloat(238/255.0), green: CGFloat(238/255.0), blue: CGFloat(238/255.0), alpha: CGFloat(1.0))
     
-    let NavigationTitleColor: NSDictionary = [NSForegroundColorAttributeName: UIColor.blackColor()]
-    let NavigationTitleColorNight: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let NavigationTitleColor: NSDictionary = [NSForegroundColorAttributeName: UIColor.black]
+    let NavigationTitleColorNight: NSDictionary = [NSForegroundColorAttributeName: UIColor.white]
+    let defaults = UserDefaults.standard
     
-    func handleNavigationBar(VC: UITableViewController) {
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handleNavigationBar(_ VC: UITableViewController) {
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             VC.tableView.backgroundColor = TableViewBgColor
-            VC.navigationController?.navigationBar.dk_barTintColorPicker = DKColorTable.sharedColorTable().pickerWithKey("BAR")
+            VC.navigationController?.navigationBar.dk_barTintColorPicker = DKColorTable.shared().picker(withKey: "BAR")
             
-            //VC.navigationController?.navigationBar.translucent = true
+            //VC.navigationController?.navigationBar.isTranslucent = true
             VC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColorNight as? [String : AnyObject]
-        }
-        else
-        {
-            VC.tableView.backgroundColor = UIColor.whiteColor()
+        } else {
+            VC.tableView.backgroundColor = UIColor.white
             VC.navigationController?.navigationBar.backgroundColor = NavigationBgColor
             VC.navigationController?.navigationBar.barTintColor = NavigationBgColor
             VC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColor as? [String : AnyObject]
         }
     }
     
-    func handleTableView(TV:UITableView){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handleTableView(_ TV:UITableView){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             TV.backgroundColor = TableViewBgColor
-        }
-        else{
+        } else {
             TV.backgroundColor = NavigationBgColor
         }
     }
     
-    func handleHomeTableViewCell(cell: HomeTableViewCell) {
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            cell.actionLabel.textColor = UIColor.whiteColor()
-            cell.backgroundColor = UIColor.darkGrayColor()
-            cell.detailLabel.textColor = UIColor.whiteColor()
-            cell.questionLabel.textColor = UIColor.whiteColor()
-        }
-        else{
-            cell.actionLabel.textColor = UIColor.blackColor()
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.detailLabel.textColor = UIColor.blackColor()
-            cell.questionLabel.textColor = UIColor.blackColor()
+    func handleHomeTableViewCell(_ cell: HomeTableViewCell) {
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            cell.actionLabel.textColor = UIColor.white
+            cell.backgroundColor = UIColor.darkGray
+            cell.detailLabel.textColor = UIColor.white
+            cell.questionLabel.textColor = UIColor.white
+        } else {
+            cell.actionLabel.textColor = UIColor.black
+            cell.backgroundColor = UIColor.white
+            cell.detailLabel.textColor = UIColor.black
+            cell.questionLabel.textColor = UIColor.black
         }
     }
     
-    func handleTabBar(TBC:UITabBarController){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handleTabBar(_ TBC:UITabBarController){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             TBC.tabBar.backgroundColor = TableViewBgColor
             TBC.tabBar.backgroundImage = UIImage.init()
-        }
-        else
-        {
+        } else {
             TBC.tabBar.backgroundColor = NavigationBgColor
             // color can't change back
         }
     }
     
-    func handleSearchViewController(STVC:SearchViewController){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handleSearchViewController(_ STVC:SearchViewController){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             STVC.view.backgroundColor = TableViewBgColor
             STVC.resultsTableView.backgroundColor = TableViewBgColor
-            STVC.searchTextField.backgroundColor = UIColor.darkGrayColor()
-            STVC.searchTextField.textColor = UIColor.whiteColor()
-            STVC.searchTextField.attributedPlaceholder = NSAttributedString(string:"搜索问题、话题或用户",attributes:[NSForegroundColorAttributeName: UIColor.lightGrayColor()])
-            STVC.searchTextField.keyboardAppearance = UIKeyboardAppearance.Dark
-        }
-        else{
-            STVC.view.backgroundColor = UIColor.whiteColor()
-            STVC.resultsTableView.backgroundColor = UIColor.whiteColor()
+            STVC.searchTextField.backgroundColor = UIColor.darkGray
+            STVC.searchTextField.textColor = UIColor.white
+            STVC.searchTextField.attributedPlaceholder = NSAttributedString(string:"搜索问题、话题或用户",attributes:[NSForegroundColorAttributeName: UIColor.lightGray])
+            STVC.searchTextField.keyboardAppearance = UIKeyboardAppearance.dark
+        } else {
+            STVC.view.backgroundColor = UIColor.white
+            STVC.resultsTableView.backgroundColor = UIColor.white
             STVC.searchTextField.backgroundColor = searchTextFieldBgColor
-            STVC.searchTextField.textColor = UIColor.blackColor()
-            STVC.searchTextField.attributedPlaceholder = NSAttributedString(string:"搜索问题、话题或用户",attributes:[NSForegroundColorAttributeName: UIColor.darkGrayColor()])
-            STVC.searchTextField.keyboardAppearance = UIKeyboardAppearance.Light
+            STVC.searchTextField.textColor = UIColor.black
+            STVC.searchTextField.attributedPlaceholder = NSAttributedString(string:"搜索问题、话题或用户",attributes:[NSForegroundColorAttributeName: UIColor.darkGray])
+            STVC.searchTextField.keyboardAppearance = UIKeyboardAppearance.light
         }
     }
     
     
-    func handleUserListTableViewCell(cell:UserListTableViewCell){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            cell.backgroundColor = UIColor.darkGrayColor()
-            cell.userNameLabel.textColor = UIColor.whiteColor()
-            cell.userSigLabel.textColor = UIColor.whiteColor()
-        }
-        else{
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.userNameLabel.textColor = UIColor.blackColor()
-            cell.userSigLabel.textColor = UIColor.blackColor()
-        }
-    }
-    
-    func handleSearchQuestionTableViewCell(cell:SearchQuestionTableViewCell){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            cell.backgroundColor = UIColor.darkGrayColor()
-            cell.titleLabel.textColor = UIColor.whiteColor()
-        }
-        else{
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.titleLabel.textColor = UIColor.blackColor()
+    func handleUserListTableViewCell(_ cell:UserListTableViewCell){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            cell.backgroundColor = UIColor.darkGray
+            cell.userNameLabel.textColor = UIColor.white
+            cell.userSigLabel.textColor = UIColor.white
+        } else {
+            cell.backgroundColor = UIColor.white
+            cell.userNameLabel.textColor = UIColor.black
+            cell.userSigLabel.textColor = UIColor.black
         }
     }
     
-    func handleDetailViewController(DVC:DetailViewController){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            DVC.view.backgroundColor = UIColor.blackColor()
+    func handleSearchQuestionTableViewCell(_ cell:SearchQuestionTableViewCell){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            cell.backgroundColor = UIColor.darkGray
+            cell.titleLabel.textColor = UIColor.white
+        } else {
+            cell.backgroundColor = UIColor.white
+            cell.titleLabel.textColor = UIColor.black
+        }
+    }
+    
+    func handleDetailViewController(_ DVC:DetailViewController){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            DVC.view.backgroundColor = UIColor.black
             DVC.answerContentView.scrollView.backgroundColor = TableViewBgColor
             DVC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColorNight as? [String : AnyObject]
-        }
-        else{
-            DVC.view.backgroundColor = UIColor.whiteColor()
+        } else {
+            DVC.view.backgroundColor = UIColor.white
             DVC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColor as? [String : AnyObject]
         }
     }
     
-    func handleCommentViewController(CVC:CommentViewController){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handleCommentViewController(_ CVC:CommentViewController){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             CVC.tableView!.backgroundColor = TableViewBgColor
             CVC.view.backgroundColor = TableViewBgColor
-            CVC.textView.textColor = UIColor.whiteColor()
-            CVC.textView.keyboardAppearance = UIKeyboardAppearance.Dark
-        }
-        else{
-            CVC.tableView?.backgroundColor = UIColor.whiteColor()
-            CVC.view.backgroundColor = UIColor.whiteColor()
-            CVC.textView.textColor = UIColor.blackColor()
-            CVC.textView.keyboardAppearance = UIKeyboardAppearance.Light
-        }
-        
-    }
-    
-    func handleAnswerCommentTableViewCell(cell:AnswerCommentTableViewCell){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            cell.backgroundColor = UIColor.darkGrayColor()
-            cell.commentLabel.textColor = UIColor.whiteColor()
-        }
-        else{
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.commentLabel.textColor = UIColor.blackColor()
+            CVC.textView.textColor = UIColor.white
+            CVC.textView.keyboardAppearance = UIKeyboardAppearance.dark
+        } else {
+            CVC.tableView?.backgroundColor = UIColor.white
+            CVC.view.backgroundColor = UIColor.white
+            CVC.textView.textColor = UIColor.black
+            CVC.textView.keyboardAppearance = UIKeyboardAppearance.light
         }
         
     }
     
-    func handleQuestionViewController(QVC:QuestionViewController){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handleAnswerCommentTableViewCell(_ cell:AnswerCommentTableViewCell){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            cell.backgroundColor = UIColor.darkGray
+            cell.commentLabel.textColor = UIColor.white
+        } else {
+            cell.backgroundColor = UIColor.white
+            cell.commentLabel.textColor = UIColor.black
+        }
+        
+    }
+    
+    func handleQuestionViewController(_ QVC:QuestionViewController){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             QVC.questionTableView.backgroundColor = TableViewBgColor
-        }
-        else{
-            QVC.questionTableView.backgroundColor = UIColor.whiteColor()
+        } else {
+            QVC.questionTableView.backgroundColor = UIColor.white
         }
     }
     
-    func handleQuestionHeaderView(QHV:QuestionHeaderView){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handleQuestionHeaderView(_ QHV:QuestionHeaderView){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             QHV.backgroundColor = TableViewBgColor
-        }
-        else{
-            QHV.backgroundColor = UIColor.whiteColor()
-        }
-    }
-    
-    func handleQuestionAnswerTableViewCell(cell:QuestionAnswerTableViewCell){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            cell.answerContentLabel.textColor = UIColor.whiteColor()
-            cell.backgroundColor = UIColor.darkGrayColor()
-        }
-        else{
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.answerContentLabel.textColor = UIColor.blackColor()
+        } else {
+            QHV.backgroundColor = UIColor.white
         }
     }
     
-    func handleTopicViewController(TVC:TopicViewController){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handleQuestionAnswerTableViewCell(_ cell:QuestionAnswerTableViewCell){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            cell.answerContentLabel.textColor = UIColor.white
+            cell.backgroundColor = UIColor.darkGray
+        } else {
+            cell.backgroundColor = UIColor.white
+            cell.answerContentLabel.textColor = UIColor.black
+        }
+    }
+    
+    func handleTopicViewController(_ TVC:TopicViewController){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             TVC.bestAnswerTableView.backgroundColor = TableViewBgColor
             TVC.topicHeaderView.backgroundColor = TableViewBgColor
-            TVC.topicTitle.textColor = UIColor.whiteColor()
-            TVC.topicDescription.textColor = UIColor.whiteColor()
-        }
-        else{
-            TVC.bestAnswerTableView.backgroundColor = UIColor.whiteColor()
-            TVC.topicHeaderView.backgroundColor = UIColor.whiteColor()
-            TVC.topicTitle.textColor = UIColor.blackColor()
-            TVC.topicDescription.textColor = UIColor.blackColor()
-        }
-    }
-    
-    func handleUserViewControllerCell(cell:UITableViewCell){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            cell.textLabel?.textColor = UIColor.whiteColor()
-            cell.backgroundColor = UIColor.darkGrayColor()
-        }
-        else{
-            cell.textLabel?.textColor = UIColor.blackColor()
-            cell.backgroundColor = UIColor.whiteColor()
+            TVC.topicTitle.textColor = UIColor.white
+            TVC.topicDescription.textColor = UIColor.white
+        } else {
+            TVC.bestAnswerTableView.backgroundColor = UIColor.white
+            TVC.topicHeaderView.backgroundColor = UIColor.white
+            TVC.topicTitle.textColor = UIColor.black
+            TVC.topicDescription.textColor = UIColor.black
         }
     }
     
-    func handleFatherTabBarController(TBC:UITabBarController){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handleUserViewControllerCell(_ cell:UITableViewCell){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            cell.textLabel?.textColor = UIColor.white
+            cell.backgroundColor = UIColor.darkGray
+        } else {
+            cell.textLabel?.textColor = UIColor.black
+            cell.backgroundColor = UIColor.white
+        }
+    }
+    
+    func handleFatherTabBarController(_ TBC:UITabBarController){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             TBC.tabBar.backgroundColor = TableViewBgColor
             TBC.tabBar.backgroundImage = UIImage.init()
-        }
-        else{
-            TBC.tabBar.backgroundColor = UIColor.clearColor()
+        } else {
+            TBC.tabBar.backgroundColor = UIColor.clear
             TBC.tabBar.backgroundImage = nil
         }
     }
     
-    func handleChangeThemeSwitchClicked(sender:UISwitch, STVC:UITableViewController){
-        if (sender.on){
+    func handleChangeThemeSwitchClicked(_ sender:UISwitch, STVC:UITableViewController){
+        if (sender.isOn){
             STVC.tableView.backgroundColor = TableViewBgColor
-            STVC.navigationController?.navigationBar.dk_barTintColorPicker = DKColorTable.sharedColorTable().pickerWithKey("BAR")
+            STVC.navigationController?.navigationBar.dk_barTintColorPicker = DKColorTable.shared().picker(withKey: "BAR")
             STVC.dk_manager.nightFalling()
             STVC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColorNight as? [String : AnyObject]
-            defaults.setObject("night", forKey: "Theme")
+            defaults.set("night", forKey: "Theme")
             STVC.tableView.reloadData()
-        }
-        else
-        {
+        } else {
             STVC.tableView.backgroundColor = NavigationBgColor
             STVC.dk_manager.dawnComing()
-            STVC.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+            STVC.navigationController?.navigationBar.backgroundColor = UIColor.white
             STVC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColor as? [String : AnyObject]
-            defaults.setObject("dawn", forKey: "Theme")
+            defaults.set("dawn", forKey: "Theme")
             STVC.tableView.reloadData()
         }
     }
     
-    func handlePostQuestionViewController(PQVC:PostQuestionViewController,questionTagsController:TLTagsControl,accessoryToolbar:UIToolbar,isAnonymousControl:NYSegmentedControl){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handlePostQuestionViewController(_ PQVC:PostQuestionViewController,questionTagsController:TLTagsControl,accessoryToolbar:UIToolbar,isAnonymousControl:NYSegmentedControl){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             PQVC.view.backgroundColor = TableViewBgColor
             PQVC.questionView.backgroundColor = TableViewBgColor
-            PQVC.questionView.textColor = UIColor.whiteColor()
-            questionTagsController.backgroundColor = UIColor.darkGrayColor()
-            PQVC.navigationController?.navigationBar.dk_barTintColorPicker = DKColorTable.sharedColorTable().pickerWithKey("BAR")
-            PQVC.navigationController?.navigationBar.translucent = false
+            PQVC.questionView.textColor = UIColor.white
+            questionTagsController.backgroundColor = UIColor.darkGray
+            PQVC.navigationController?.navigationBar.dk_barTintColorPicker = DKColorTable.shared().picker(withKey: "BAR")
+            PQVC.navigationController?.navigationBar.isTranslucent = false
             PQVC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColorNight as? [String : AnyObject]
-            PQVC.questionView.keyboardAppearance = UIKeyboardAppearance.Dark
-            accessoryToolbar.barTintColor = UIColor.blackColor()
+            PQVC.questionView.keyboardAppearance = UIKeyboardAppearance.dark
+            accessoryToolbar.barTintColor = UIColor.black
             isAnonymousControl.backgroundColor = TableViewBgColor
-            isAnonymousControl.segmentIndicatorBackgroundColor = UIColor.darkGrayColor()
-        }
-        else{
-            PQVC.view.backgroundColor = UIColor.whiteColor()
-            PQVC.questionView.backgroundColor = UIColor.whiteColor()
-            PQVC.questionView.textColor = UIColor.blackColor()
-            questionTagsController.backgroundColor = UIColor.whiteColor()
+            isAnonymousControl.segmentIndicatorBackgroundColor = UIColor.darkGray
+        } else {
+            PQVC.view.backgroundColor = UIColor.white
+            PQVC.questionView.backgroundColor = UIColor.white
+            PQVC.questionView.textColor = UIColor.black
+            questionTagsController.backgroundColor = UIColor.white
             PQVC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColor as? [String : AnyObject]
-            PQVC.questionView.keyboardAppearance = UIKeyboardAppearance.Light
+            PQVC.questionView.keyboardAppearance = UIKeyboardAppearance.light
             accessoryToolbar.barTintColor = NavigationBgColor
             isAnonymousControl.backgroundColor = UIColor(white: 0.9, alpha:1.0)
-            isAnonymousControl.segmentIndicatorBackgroundColor = UIColor.whiteColor()
+            isAnonymousControl.segmentIndicatorBackgroundColor = UIColor.white
         }
     }
     
-    func handlePQVCkeyboard(PQVC:PostQuestionViewController,keyboardHeight:CGFloat,tagControlHeight:CGFloat,questionTagsControl:TLTagsControl){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            PQVC.questionView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - keyboardHeight - tagControlHeight - 4 - 64)
-            questionTagsControl.frame = CGRectMake(8, PQVC.questionView.frame.size.height, PQVC.view.frame.size.width - 16, tagControlHeight)
-        }
-        else{
-            PQVC.questionView.frame = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - keyboardHeight - tagControlHeight - 4 - 64)
-            questionTagsControl.frame = CGRectMake(8, PQVC.questionView.frame.size.height + 64, PQVC.view.frame.size.width - 16, tagControlHeight)
+    func handlePQVCkeyboard(_ PQVC:PostQuestionViewController,keyboardHeight:CGFloat,tagControlHeight:CGFloat,questionTagsControl:TLTagsControl){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            PQVC.questionView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height - keyboardHeight - tagControlHeight - 4 - 64)
+            questionTagsControl.frame = CGRect(x: 8, y: PQVC.questionView.frame.size.height, width: PQVC.view.frame.size.width - 16, height: tagControlHeight)
+        } else {
+            PQVC.questionView.frame = CGRect(x: 0, y: 64, width: self.view.frame.size.width, height: self.view.frame.size.height - keyboardHeight - tagControlHeight - 4 - 64)
+            questionTagsControl.frame = CGRect(x: 8, y: PQVC.questionView.frame.size.height + 64, width: PQVC.view.frame.size.width - 16, height: tagControlHeight)
         }
     }
     
-    func handleAddDetailViewController(ADVC:AddDetailViewController,accessoryToolbar:UIToolbar){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handleAddDetailViewController(_ ADVC:AddDetailViewController,accessoryToolbar:UIToolbar){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             ADVC.detailTextView.backgroundColor = TableViewBgColor
-            ADVC.detailTextView.textColor = UIColor.whiteColor()
+            ADVC.detailTextView.textColor = UIColor.white
             ADVC.view.backgroundColor = TableViewBgColor
-            ADVC.navigationController?.navigationBar.dk_barTintColorPicker = DKColorTable.sharedColorTable().pickerWithKey("BAR")
-            ADVC.navigationController?.navigationBar.translucent = false
+            ADVC.navigationController?.navigationBar.dk_barTintColorPicker = DKColorTable.shared().picker(withKey: "BAR")
+            ADVC.navigationController?.navigationBar.isTranslucent = false
             ADVC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColorNight as? [String : AnyObject]
-            ADVC.detailTextView.keyboardAppearance = UIKeyboardAppearance.Dark
+            ADVC.detailTextView.keyboardAppearance = UIKeyboardAppearance.dark
             accessoryToolbar.barTintColor = TableViewBgColor
-        }
-        else{
-            ADVC.detailTextView.backgroundColor = UIColor.whiteColor()
+        } else {
+            ADVC.detailTextView.backgroundColor = UIColor.white
             ADVC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColor as? [String : AnyObject]
-            ADVC.detailTextView.keyboardAppearance = UIKeyboardAppearance.Light
-            ADVC.detailTextView.textColor = UIColor.blackColor()
-            ADVC.view.backgroundColor = UIColor.whiteColor()
+            ADVC.detailTextView.keyboardAppearance = UIKeyboardAppearance.light
+            ADVC.detailTextView.textColor = UIColor.black
+            ADVC.view.backgroundColor = UIColor.white
             accessoryToolbar.barTintColor = NavigationBgColor
         }
     }
     
-    func handleADVCkeyboard(ADVC:AddDetailViewController,keyboardHeight:CGFloat){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            ADVC.detailTextView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - keyboardHeight - 64)
-        }
-        else{
-            ADVC.detailTextView.frame = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - keyboardHeight - 64)
+    func handleADVCkeyboard(_ ADVC:AddDetailViewController,keyboardHeight:CGFloat){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            ADVC.detailTextView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height - keyboardHeight - 64)
+        } else {
+            ADVC.detailTextView.frame = CGRect(x: 0, y: 64, width: self.view.frame.size.width, height: self.view.frame.size.height - keyboardHeight - 64)
         }
     }
     
-    func handlePostAnswerViewController(PAVC:PostAnswerViewController,accessoryToolbar:UIToolbar,isAnonymousControl:NYSegmentedControl){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handlePostAnswerViewController(_ PAVC:PostAnswerViewController,accessoryToolbar:UIToolbar,isAnonymousControl:NYSegmentedControl){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             PAVC.view.backgroundColor = TableViewBgColor
             PAVC.answerView.backgroundColor = TableViewBgColor
-            PAVC.answerView.textColor = UIColor.whiteColor()
-            PAVC.navigationController?.navigationBar.dk_barTintColorPicker = DKColorTable.sharedColorTable().pickerWithKey("BAR")
+            PAVC.answerView.textColor = UIColor.white
+            PAVC.navigationController?.navigationBar.dk_barTintColorPicker = DKColorTable.shared().picker(withKey: "BAR")
             PAVC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColorNight as? [String : AnyObject]
-            PAVC.answerView.keyboardAppearance = UIKeyboardAppearance.Dark
-            accessoryToolbar.barTintColor = UIColor.blackColor()
+            PAVC.answerView.keyboardAppearance = UIKeyboardAppearance.dark
+            accessoryToolbar.barTintColor = UIColor.black
             isAnonymousControl.backgroundColor = TableViewBgColor
-            isAnonymousControl.segmentIndicatorBackgroundColor = UIColor.darkGrayColor()
-        }
-        else{
-            PAVC.view.backgroundColor = UIColor.whiteColor()
-            PAVC.answerView.backgroundColor = UIColor.whiteColor()
-            PAVC.answerView.textColor = UIColor.blackColor()
+            isAnonymousControl.segmentIndicatorBackgroundColor = UIColor.darkGray
+        } else {
+            PAVC.view.backgroundColor = UIColor.white
+            PAVC.answerView.backgroundColor = UIColor.white
+            PAVC.answerView.textColor = UIColor.black
             PAVC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColor as? [String : AnyObject]
-            PAVC.answerView.keyboardAppearance = UIKeyboardAppearance.Light
+            PAVC.answerView.keyboardAppearance = UIKeyboardAppearance.light
             accessoryToolbar.barTintColor = NavigationBgColor
             isAnonymousControl.backgroundColor = UIColor(white: 0.9, alpha:1.0)
-            isAnonymousControl.segmentIndicatorBackgroundColor = UIColor.whiteColor()
+            isAnonymousControl.segmentIndicatorBackgroundColor = UIColor.white
         }
     }
     
-    func handleHTMLWithTimeWithContent(content:NSString, timeStamp:NSInteger) -> NSString{
+    func handleHTMLWithTimeWithContent(_ content:NSString, timeStamp:NSInteger) -> NSString{
         var ProcessedHTML:String
         
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            ProcessedHTML = wjStringProcessor.convertToBootstrapHTMLWithTimeWithContentDark(content as String, andTimeStamp: timeStamp)
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            ProcessedHTML = wjStringProcessor.convertToBootstrapHTMLWithTime(withContentDark: content as String, andTimeStamp: timeStamp)
+        } else {
+            ProcessedHTML = wjStringProcessor.convertToBootstrapHTMLWithTime(withContent: content as String, andTimeStamp: timeStamp)
         }
-        else
-        {
-            ProcessedHTML = wjStringProcessor.convertToBootstrapHTMLWithTimeWithContent(content as String, andTimeStamp: timeStamp)
-        }
-        return ProcessedHTML
+        return ProcessedHTML as NSString
     }
     
     
-    func handleHTMLWithExtraBlankLinesWithContent(content:NSString) -> String {
+    func handleHTMLWithExtraBlankLinesWithContent(_ content:NSString) -> String {
         var ProcessedHTML: String
         
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            ProcessedHTML = wjStringProcessor.convertToBootstrapHTMLWithExtraBlankLinesWithContentDark(content as String)
-        }
-        else
-        {
-            ProcessedHTML = wjStringProcessor.convertToBootstrapHTMLWithExtraBlankLinesWithContent(content as String)
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            ProcessedHTML = wjStringProcessor.convertToBootstrapHTMLWithExtraBlankLines(withContentDark: content as String)
+        } else {
+            ProcessedHTML = wjStringProcessor.convertToBootstrapHTMLWithExtraBlankLines(withContent: content as String)
         }
         return ProcessedHTML as String
         
     }
     
-    func handleQuestionHeaderView(headerView:QuestionHeaderView, questionInfo:QuestionInfo){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            headerView.detailView.loadHTMLString(wjStringProcessor.convertToBootstrapHTMLWithContentDark(questionInfo.questionDetail), baseURL: NSURL.fileURLWithPath(NSBundle.mainBundle().resourcePath!, isDirectory: true))
-            headerView.detailView.backgroundColor = UIColor.blackColor()
-        }
-        else{
-            headerView.detailView.loadHTMLString(wjStringProcessor.convertToBootstrapHTMLWithContent(questionInfo.questionDetail), baseURL: NSURL.fileURLWithPath(NSBundle.mainBundle().resourcePath!, isDirectory: true))
-            headerView.detailView.backgroundColor = UIColor.whiteColor()
-        }
-    }
-    
-    func handleQuestionHeaderViewTitle(headerView:QuestionHeaderView){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            headerView.questionTitle.textColor = UIColor.whiteColor()
-        }
-        else{
-            headerView.questionTitle.textColor = UIColor.blackColor()
+    func handleQuestionHeaderView(_ headerView:QuestionHeaderView, questionInfo:QuestionInfo){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            headerView.detailView.loadHTMLString(wjStringProcessor.convertToBootstrapHTML(withContentDark: questionInfo.questionDetail), baseURL: URL(fileURLWithPath: Bundle.main.resourcePath!, isDirectory: true))
+            headerView.detailView.backgroundColor = UIColor.black
+        } else {
+            headerView.detailView.loadHTMLString(wjStringProcessor.convertToBootstrapHTML(withContent: questionInfo.questionDetail), baseURL: URL(fileURLWithPath: Bundle.main.resourcePath!, isDirectory: true))
+            headerView.detailView.backgroundColor = UIColor.white
         }
     }
     
-    func handleUserInfoView(DVC:DetailViewController){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            DVC.userInfoView.backgroundColor = UIColor.blackColor()
-            DVC.userSigLabel.textColor = UIColor.whiteColor()
+    func handleQuestionHeaderViewTitle(_ headerView:QuestionHeaderView){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            headerView.questionTitle.textColor = UIColor.white
+        } else {
+            headerView.questionTitle.textColor = UIColor.black
+        }
+    }
+    
+    func handleUserInfoView(_ DVC:DetailViewController){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            DVC.userInfoView.backgroundColor = UIColor.black
+            DVC.userSigLabel.textColor = UIColor.white
             DVC.toolBar.barTintColor = TableViewBgColor
-            DVC.answerContentView.backgroundColor = UIColor.blackColor()
-        }
-        else{
-            DVC.userInfoView.backgroundColor = UIColor.whiteColor()
-            DVC.userSigLabel.textColor = UIColor.blackColor()
-            DVC.toolBar.barTintColor = UIColor.whiteColor()
-        }
-    }
-    
-    func handleCommentTextView(CTV:CommentTextView){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            CTV.placeholderColor = UIColor.lightGrayColor()
-            CTV.backgroundColor = UIColor.darkGrayColor()
-        }
-        else{
-            CTV.backgroundColor = UIColor.whiteColor()
-            CTV.placeholderColor = UIColor.lightGrayColor()
+            DVC.answerContentView.backgroundColor = UIColor.black
+        } else {
+            DVC.userInfoView.backgroundColor = UIColor.white
+            DVC.userSigLabel.textColor = UIColor.black
+            DVC.toolBar.barTintColor = UIColor.white
         }
     }
     
-    func handletagInputField(tagInputField_:UITextField){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            tagInputField_.backgroundColor = UIColor.darkGrayColor()
-            tagInputField_.textColor = UIColor.whiteColor()
-            tagInputField_.keyboardAppearance = UIKeyboardAppearance.Dark
+    func handleCommentTextView(_ CTV:CommentTextView){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            CTV.placeholderColor = UIColor.lightGray
+            CTV.backgroundColor = UIColor.darkGray
+        } else {
+            CTV.backgroundColor = UIColor.white
+            CTV.placeholderColor = UIColor.lightGray
+        }
+    }
+    
+    func handletagInputField(_ tagInputField_:UITextField){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            tagInputField_.backgroundColor = UIColor.darkGray
+            tagInputField_.textColor = UIColor.white
+            tagInputField_.keyboardAppearance = UIKeyboardAppearance.dark
             print("reached here!!!!")
-        }
-        else{
-            tagInputField_.backgroundColor = UIColor.whiteColor()
-            tagInputField_.textColor = UIColor.blackColor()
-            tagInputField_.keyboardAppearance = UIKeyboardAppearance.Light
-        }
-    }
-    
-    func handleUserHeaderView(UHV:UserHeaderView){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            UHV.usernameLabel.textColor = UIColor.whiteColor()
-            UHV.userSigLabel.textColor = UIColor.whiteColor()
-            UHV.backgroundColor = UIColor.clearColor()
-        }
-        else{
-            UHV.userSigLabel.textColor = UIColor.blackColor()
-            UHV.usernameLabel.textColor = UIColor.blackColor()
+        } else {
+            tagInputField_.backgroundColor = UIColor.white
+            tagInputField_.textColor = UIColor.black
+            tagInputField_.keyboardAppearance = UIKeyboardAppearance.light
         }
     }
     
-    func handleAboutViewController(AVC:AboutViewController){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
+    func handleUserHeaderView(_ UHV:UserHeaderView){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            UHV.usernameLabel.textColor = UIColor.white
+            UHV.userSigLabel.textColor = UIColor.white
+            UHV.backgroundColor = UIColor.clear
+        } else {
+            UHV.userSigLabel.textColor = UIColor.black
+            UHV.usernameLabel.textColor = UIColor.black
+        }
+    }
+    
+    func handleAboutViewController(_ AVC:AboutViewController){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
             AVC.view.backgroundColor = TableViewBgColor
-        }
-        else{
-            AVC.view.backgroundColor = UIColor.whiteColor()
+        } else {
+            AVC.view.backgroundColor = UIColor.white
         }
     }
     
-    func handleDisappearNavBar(VC:UIViewController){
-        if((defaults.objectForKey("Theme") )! .isEqualToString("night")){
-            UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+    func handleDisappearNavBar(_ VC:UIViewController){
+        if (defaults.object(forKey: "Theme")! as AnyObject).isEqual(to: "night") {
+            UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
             VC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColorNight as? [String : AnyObject]
-        }
-        else{
-            UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        } else {
+            UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
             VC.navigationController?.navigationBar.titleTextAttributes = NavigationTitleColor as? [String : AnyObject]
         }
     }
