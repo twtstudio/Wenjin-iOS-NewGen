@@ -31,6 +31,10 @@
                                            categories:nil];
     [APService setupWithOption:launchOptions];
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Theme"] == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"dawn" forKey:@"Theme"];
+    }
+    
     // RongCloud
 //    [[RCIM sharedRCIM] initWithAppKey:[wjAPIs rongCloudAppKey]];
     

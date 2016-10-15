@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BH6-Mm-uy7">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BH6-Mm-uy7">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Main Tab Bar Controller-->
@@ -15,7 +16,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="qRm-bb-iWh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="okm-5b-TgK" kind="relationship" relationship="viewControllers" id="NOy-LL-D3J"/>
@@ -55,12 +56,12 @@
                         <viewControllerLayoutGuide type="bottom" id="oPJ-Lf-Mzq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Gcy-gX-fOQ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PVd-rI-bS1">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PVd-rI-bS1">
+                                <frame key="frameInset" width="600" height="600"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="2cd-qG-R47" id="bQ8-pM-JyB"/>
                                     <outlet property="delegate" destination="2cd-qG-R47" id="94z-02-eGZ"/>
@@ -68,14 +69,14 @@
                                     <outlet property="emptyDataSetSource" destination="2cd-qG-R47" id="NDl-GX-DpQ"/>
                                 </connections>
                             </tableView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70h-Pl-6ri">
-                                <rect key="frame" x="0.0" y="64" width="600" height="40"/>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70h-Pl-6ri">
+                                <frame key="frameInset" minY="64" width="600" height="40"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ALy-gO-L65">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+                                    <frame key="frameInset"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wWB-BI-oGZ">
-                                            <rect key="frame" x="180" y="6" width="240" height="29"/>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wWB-BI-oGZ">
+                                            <frame key="frameInset" minX="180" minY="6" width="240" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="28" id="kIQ-fi-HRJ"/>
                                                 <constraint firstAttribute="width" constant="240" id="lUW-W3-t3C"/>
@@ -101,7 +102,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="70h-Pl-6ri" firstAttribute="top" secondItem="rt2-7x-7Rm" secondAttribute="bottom" id="1Ow-HM-mZK"/>
                             <constraint firstItem="70h-Pl-6ri" firstAttribute="top" secondItem="rt2-7x-7Rm" secondAttribute="bottom" id="9WU-Dq-fNi"/>
@@ -143,9 +144,9 @@
             <objects>
                 <tableViewController id="gYk-VO-Prx" customClass="HomeViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Cxq-MK-B4R">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <outlet property="dataSource" destination="gYk-VO-Prx" id="oA3-Jd-FPV"/>
                             <outlet property="delegate" destination="gYk-VO-Prx" id="549-TI-n4y"/>
@@ -184,9 +185,9 @@
             <objects>
                 <tableViewController storyboardIdentifier="NotificationTableViewController" id="OyI-9l-k5X" customClass="NotificationTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="K0A-2x-eNf">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <outlet property="dataSource" destination="OyI-9l-k5X" id="VN1-T1-DB3"/>
                             <outlet property="delegate" destination="OyI-9l-k5X" id="J1y-jU-8xe"/>
@@ -234,9 +235,9 @@
                         <viewControllerLayoutGuide type="bottom" id="icN-TE-3kX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4qb-4B-GIF">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="通知" id="kH6-Ex-Rcy">
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="k4U-GQ-916">
@@ -264,9 +265,9 @@
                         <viewControllerLayoutGuide type="bottom" id="p6M-0B-Ifb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kgJ-xg-Mw6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="发现" id="8Fi-RU-EnC"/>
                 </viewController>
@@ -279,9 +280,9 @@
             <objects>
                 <tableViewController storyboardIdentifier="ExploreTableViewController" id="pw4-sm-7bG" customClass="ExploreTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="iZH-0e-un2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <outlet property="dataSource" destination="pw4-sm-7bG" id="2jc-ib-H6W"/>
                             <outlet property="delegate" destination="pw4-sm-7bG" id="KBs-lx-4h0"/>
@@ -304,9 +305,9 @@
                         <viewControllerLayoutGuide type="bottom" id="mEq-Uq-s8o"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WVN-HQ-qX5">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="发起问题" id="IWJ-L7-CVg">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xuJ-NQ-jnx">
@@ -367,9 +368,9 @@
                         <viewControllerLayoutGuide type="bottom" id="zah-Ph-U4w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MV5-kq-izv">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="添加描述" id="wFF-KK-ocg">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="HpL-jE-gRz">
@@ -393,9 +394,9 @@
             <objects>
                 <tableViewController storyboardIdentifier="TopicListTableViewController" id="XZD-gk-4J7" customClass="TopicListTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="128" sectionHeaderHeight="22" sectionFooterHeight="22" id="BCg-jv-BMB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <outlet property="dataSource" destination="XZD-gk-4J7" id="wcv-gV-Hy2"/>
                             <outlet property="delegate" destination="XZD-gk-4J7" id="GaJ-jM-Pre"/>
@@ -435,19 +436,19 @@
                         <viewControllerLayoutGuide type="bottom" id="0bB-Lj-xtN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4ho-GJ-k8E">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="1ex-53-8zL">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="1ex-53-8zL">
+                                <frame key="frameInset" width="600" height="551"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="DE9-zZ-tIq" id="gjc-Zh-xda"/>
                                     <outlet property="delegate" destination="DE9-zZ-tIq" id="c6K-le-SFx"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1ex-53-8zL" firstAttribute="leading" secondItem="4ho-GJ-k8E" secondAttribute="leadingMargin" constant="-20" id="0gf-ld-sjY"/>
                             <constraint firstItem="1ex-53-8zL" firstAttribute="top" secondItem="4ho-GJ-k8E" secondAttribute="topMargin" id="JN1-Yz-wrA"/>
@@ -480,9 +481,9 @@
             <objects>
                 <tableViewController id="Gbi-lA-BFC" customClass="SettingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="AfM-h1-zUB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <outlet property="dataSource" destination="Gbi-lA-BFC" id="tqe-jH-Ph5"/>
                             <outlet property="delegate" destination="Gbi-lA-BFC" id="7Ml-OL-8kz"/>
@@ -499,9 +500,9 @@
             <objects>
                 <tableViewController id="LsP-x6-Wrf" customClass="ProfileEditTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Kxg-ca-QCa">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <outlet property="dataSource" destination="LsP-x6-Wrf" id="tNj-Tq-KiE"/>
                             <outlet property="delegate" destination="LsP-x6-Wrf" id="B2w-xb-GWZ"/>
@@ -545,9 +546,9 @@
                         <viewControllerLayoutGuide type="bottom" id="9J8-kL-f8R"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ezR-Vz-DbC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="话题" id="Jhj-ct-by1">
                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="bH4-DH-AXW">

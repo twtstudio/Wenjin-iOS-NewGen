@@ -37,13 +37,19 @@
         
         NSDictionary *userDic = (NSDictionary *)responseObject;
         if ([userDic[@"errno"] isEqual:@1]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                success([UserInfo mj_objectWithKeyValues:userDic[@"rsm"]]);
-            });
-            if ([uid integerValue] == [[data shareInstance].myUID integerValue]) {
-                [wjCacheManager saveCacheData:userDic[@"rsm"] withKey:MY_PROFILE_CACHE];
+            if ([[userDic objectForKey:@"rsm"] count] != 0){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    success([UserInfo mj_objectWithKeyValues:userDic[@"rsm"]]);
+                });
+                if ([uid integerValue] == [[data shareInstance].myUID integerValue]) {
+                    [wjCacheManager saveCacheData:userDic[@"rsm"] withKey:MY_PROFILE_CACHE];
+                }
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                
+            } else {
+                failure(@"获取数据失败了");
             }
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 failure(userDic[@"err"]);
@@ -70,19 +76,23 @@
         
         NSDictionary *dicData = (NSDictionary *)responseObject;
         if ([dicData[@"errno"] isEqual:@1]) {
-            NSInteger totalRows = [(dicData[@"rsm"])[@"total_rows"] integerValue];
-            if (totalRows != 0) {
-                NSArray *rowsData = [UserInfo mj_objectArrayWithKeyValuesArray:(dicData[@"rsm"])[@"rows"]];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    success(totalRows, rowsData);
-                });
+            if ([[dicData objectForKey:@"rsm"] count] != 0){
+                NSInteger totalRows = [(dicData[@"rsm"])[@"total_rows"] integerValue];
+                if (totalRows != 0) {
+                    NSArray *rowsData = [UserInfo mj_objectArrayWithKeyValuesArray:(dicData[@"rsm"])[@"rows"]];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        success(totalRows, rowsData);
+                    });
+                } else {
+                    NSArray *rowsData = @[];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        success(totalRows, rowsData);
+                    });
+                }
+
             } else {
-                NSArray *rowsData = @[];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    success(totalRows, rowsData);
-                });
+                failure(@"获取数据失败了");
             }
-            
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 failure(dicData[@"err"]);
@@ -103,25 +113,32 @@
                                  @"page": [NSNumber numberWithInteger:page],
                                  @"platform": @"ios"};
     NSArray *queueURLArray = @[[wjAPIs myQuestions], [wjAPIs myAnswers], [wjAPIs myFollowQuestions]];
+    NSLog(@"%@", parameters);
     [manager GET:queueURLArray[feedType] parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary *dicData = (NSDictionary *)responseObject;
+        NSLog(@"dicdata: %@", dicData);
         if ([dicData[@"errno"] isEqual:@1]) {
-            NSInteger totalRows = [(dicData[@"rsm"])[@"total_rows"] integerValue];
-            if (totalRows != 0) {
-                NSArray *rawData = (dicData[@"rsm"])[@"rows"];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (feedType == UserFeedTypeAnswer) {
-                        success(totalRows, [AnswerInfo mj_objectArrayWithKeyValuesArray:rawData]);
-                    } else {
-                        success(totalRows, [FeedQuestion mj_objectArrayWithKeyValuesArray:rawData]);
-                    }
-                });
+            if ([[dicData objectForKey:@"rsm"] count] != 0){
+                NSLog(@"lll");
+                NSInteger totalRows = [(dicData[@"rsm"])[@"total_rows"] integerValue];
+                if (totalRows != 0) {
+                    NSArray *rawData = (dicData[@"rsm"])[@"rows"];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (feedType == UserFeedTypeAnswer) {
+                            success(totalRows, [AnswerInfo mj_objectArrayWithKeyValuesArray:rawData]);
+                        } else {
+                            success(totalRows, [FeedQuestion mj_objectArrayWithKeyValuesArray:rawData]);
+                        }
+                    });
+                } else {
+                    NSArray *rowsData = @[];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        success(totalRows, rowsData);
+                    });
+                }
             } else {
-                NSArray *rowsData = @[];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    success(totalRows, rowsData);
-                });
+                failure(@"获取数据失败了");
             }
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -145,17 +162,21 @@
     [manager GET:[wjAPIs myFollowTopics] parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dicData = (NSDictionary *)responseObject;
         if ([dicData[@"errno"] isEqual:@1]) {
-            NSInteger totalRows = [(dicData[@"rsm"])[@"total_rows"] integerValue];
-            if (totalRows != 0) {
-                NSArray *rowsData = [TopicInfo mj_objectArrayWithKeyValuesArray:(dicData[@"rsm"])[@"rows"]];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    success(totalRows, rowsData);
-                });
+            if ([[dicData objectForKey:@"rsm"] count] != 0){
+                NSInteger totalRows = [(dicData[@"rsm"])[@"total_rows"] integerValue];
+                if (totalRows != 0) {
+                    NSArray *rowsData = [TopicInfo mj_objectArrayWithKeyValuesArray:(dicData[@"rsm"])[@"rows"]];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        success(totalRows, rowsData);
+                    });
+                } else {
+                    NSArray *rowsData = @[];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        success(totalRows, rowsData);
+                    });
+                }
             } else {
-                NSArray *rowsData = @[];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    success(totalRows, rowsData);
-                });
+                failure(@"获取数据失败了");
             }
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
