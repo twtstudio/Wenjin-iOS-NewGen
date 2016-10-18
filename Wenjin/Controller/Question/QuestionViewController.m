@@ -58,7 +58,7 @@
     questionSummary = @"";
     
     UIBarButtonItem *shareBtn = [[UIBarButtonItem alloc] bk_initWithBarButtonSystemItem:UIBarButtonSystemItemAction handler:^(id weakSender) {
-        NSURL *shareURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://wenjin.in/?/m/question/%@", questionId]];
+        NSURL *shareURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://wenjin.im/?/m/question/%@", questionId]];
         NSArray *activityItems = @[shareURL, questionSummary];
         OpenInSafariActivity *openInSafari = [[OpenInSafariActivity alloc] init];
         WeChatMomentsActivity *wxMoment = [[WeChatMomentsActivity alloc] init];

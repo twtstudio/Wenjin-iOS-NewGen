@@ -80,7 +80,7 @@
         NSString *responsiveImgStr = [NSString stringWithFormat:@"<img class=\"img-responsive\" alt=\"Responsive image\" src=\"%@\" width=100%%/>",imgPath];
         
         contentStr = [contentStr stringByReplacingOccurrencesOfString:originalImgStr withString:responsiveImgStr];
-        contentStr = [contentStr stringByReplacingOccurrencesOfString:@"http://wenjin.in/static/js/app/app.js" withString:@""];
+        contentStr = [contentStr stringByReplacingOccurrencesOfString:@"http://wenjin.im/static/js/app/app.js" withString:@""];
     }
     return contentStr;
 }
