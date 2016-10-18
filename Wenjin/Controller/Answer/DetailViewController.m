@@ -118,9 +118,9 @@
         if ((detailType == DetailTypeAnswer && questionId != nil && summaryString != nil) || (detailType == DetailTypeArticle && answerId != nil && summaryString != nil)) {
             NSURL *shareURL;
             if (detailType == DetailTypeAnswer) {
-                shareURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://wenjin.in/m/question/id-%@__answer_id-%@__single-TRUE", questionId, answerId]];
+                shareURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://wenjin.im/m/question/id-%@__answer_id-%@__single-TRUE", questionId, answerId]];
             } else {
-                shareURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://wenjin.in/article/%@", answerId]];
+                shareURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://wenjin.im/article/%@", answerId]];
             }
             NSArray *activityItems = @[shareURL, summaryString];
             OpenInSafariActivity *openInSafari = [[OpenInSafariActivity alloc] init];
