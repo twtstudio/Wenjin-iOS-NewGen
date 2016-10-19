@@ -126,6 +126,7 @@ import UIKit
             CVC.view.backgroundColor = TableViewBgColor
             CVC.textView.textColor = UIColor.white
             CVC.textView.keyboardAppearance = UIKeyboardAppearance.dark
+            CVC.textInputbar.backgroundColor = TableViewBgColor
         } else {
             CVC.tableView?.backgroundColor = UIColor.white
             CVC.view.backgroundColor = UIColor.white

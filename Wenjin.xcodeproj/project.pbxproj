@@ -10,7 +10,7 @@
 		649489061DAE155100F9D419 /* ChangeTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649489051DAE155000F9D419 /* ChangeTheme.swift */; };
 		6552BD48B7A3462433D706ED /* libPods-Wenjin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F568CAD88500D678A59B675 /* libPods-Wenjin.a */; };
 		6847712C1D3FAC7900DEC800 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847712B1D3FAC7900DEC800 /* AccountViewController.m */; };
-		68D135F51DB220D100D33F25 /* wjAPIs.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D135F41DB220D100D33F25 /* wjAPIs.m */; };
+		B12A76101DB7638700540EB3 /* wjAPIs.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A760F1DB7638700540EB3 /* wjAPIs.m */; };
 		BF9812D227D09E036E85AAF6 /* libPods-WenjinTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB71D1E22E39D19FE047C832 /* libPods-WenjinTests.a */; };
 		E9025AE61BBEBD2200AEF430 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9025AE21BBEBD2200AEF430 /* libWeChatSDK.a */; };
 		E90968371AF0B79B00E65F7E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E90968361AF0B79B00E65F7E /* SystemConfiguration.framework */; };
@@ -170,11 +170,11 @@
 		649489051DAE155000F9D419 /* ChangeTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTheme.swift; sourceTree = "<group>"; };
 		6847712A1D3FAC7900DEC800 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		6847712B1D3FAC7900DEC800 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
-		68D135F41DB220D100D33F25 /* wjAPIs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = wjAPIs.m; path = "../../Desktop/有用的文件/wjAPIs.m"; sourceTree = "<group>"; };
 		6EDFA088A505B8A3D7BF0D06 /* Pods-WenjinTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WenjinTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WenjinTests/Pods-WenjinTests.release.xcconfig"; sourceTree = "<group>"; };
 		AA56BCBC59B997DF8F7D9721 /* Pods-Wenjin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wenjin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin.debug.xcconfig"; sourceTree = "<group>"; };
 		AC5F4224133175597A140CE8 /* Pods-Wenjin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wenjin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wenjin/Pods-Wenjin.release.xcconfig"; sourceTree = "<group>"; };
 		B129C09C1D58B72000623ED6 /* Wenjin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wenjin-Bridging-Header.h"; sourceTree = "<group>"; };
+		B12A760F1DB7638700540EB3 /* wjAPIs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = wjAPIs.m; path = Model/Security/wjAPIs.m; sourceTree = "<group>"; };
 		E9025AE21BBEBD2200AEF430 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		E9025AE41BBEBD2200AEF430 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		E9025AE51BBEBD2200AEF430 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
@@ -1083,7 +1083,7 @@
 		E9C9C7041AC71E1C00CC228A /* Security */ = {
 			isa = PBXGroup;
 			children = (
-				68D135F41DB220D100D33F25 /* wjAPIs.m */,
+				B12A760F1DB7638700540EB3 /* wjAPIs.m */,
 				E9C9C7051AC71E3600CC228A /* wjAPIs.h */,
 				E9C9C7081AC71E4200CC228A /* wpyEncryption.h */,
 				E9C9C7091AC71E4200CC228A /* wpyEncryption.m */,
@@ -1518,7 +1518,6 @@
 				E9EB618F1ACC2B2D001F5DA3 /* DetailDataManager.m in Sources */,
 				E952E1671AE520DE00F8B7BF /* FeedbackForm.m in Sources */,
 				E93063B51ACA3982000140C1 /* HomeTableViewCell.m in Sources */,
-				68D135F51DB220D100D33F25 /* wjAPIs.m in Sources */,
 				E9EB618A1ACC187A001F5DA3 /* QuestionAnswerTableViewCell.m in Sources */,
 				E90F1C551C1ACA03007E110A /* WMMenuItem.m in Sources */,
 				E990790F1ACEE371008DCA22 /* NotLoggedInView.m in Sources */,
@@ -1579,6 +1578,7 @@
 				E93063D21ACAAB81000140C1 /* QuestionViewController.m in Sources */,
 				E90F42741ACD979500263622 /* UserDataManager.m in Sources */,
 				E91270771B00A7F500E32110 /* NotificationManager.m in Sources */,
+				B12A76101DB7638700540EB3 /* wjAPIs.m in Sources */,
 				E90F1C561C1ACA03007E110A /* WMMenuView.m in Sources */,
 				E92388F01B4695A000C3EE3A /* ProfileEditForm.m in Sources */,
 				E9479EE31AE2AB42003BCE97 /* AboutViewController.m in Sources */,

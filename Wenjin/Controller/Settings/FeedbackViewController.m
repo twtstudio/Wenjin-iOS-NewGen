@@ -77,10 +77,10 @@
 //    if ([cell isKindOfClass:(FXFormTextFieldCell *)]) {
 //        [[FXFormTextFieldCell *cell textField] setKeyboardAppearance:UIKeyboardAppearanceDark];
 //    }
-    FXFormTextFieldCell *fooCell = cell;
-    if (fooCell != nil) {
-        [[fooCell textField] setKeyboardAppearance:UIKeyboardAppearanceDark];
-    }
+//    FXFormTextFieldCell *fooCell = cell;
+//    if (fooCell != nil) {
+//        [[fooCell textField] setKeyboardAppearance:UIKeyboardAppearanceDark];
+//    }
 }
 /*
 #pragma mark - Navigation
